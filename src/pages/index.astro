@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import Team from '../components/Team.astro';
+import WhyUs from '../components/WhyUs.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { es } from '../i18n/es';
+
+const t = es;
+const whatsappHref = `https://wa.me/584140000000?text=${encodeURIComponent(t.contact.whatsappMessage)}`;
+---
+
+<Layout t={t}>
+  <Header t={t} />
+  <main>
+    <Hero t={t} whatsappHref={whatsappHref} />
+    <Services t={t} />
+    <Team t={t} />
+    <WhyUs t={t} />
+    <Contact t={t} whatsappHref={whatsappHref} />
+  </main>
+  <Footer t={t} />
+</Layout>

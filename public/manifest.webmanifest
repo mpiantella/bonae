@@ -1,0 +1,17 @@
+{
+  "name": "NOBAM - Servicios Digitales",
+  "short_name": "NOBAM",
+  "description": "Servicios digitales para empresas venezolanas",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAFA",
+  "theme_color": "#1E3A5F",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+---
+import type { Translations } from '../i18n/es';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+
+// Gradient colors for each team member avatar
+const avatarColors = [
+  'from-navy-600 to-navy-700',
+  'from-navy-500 to-navy-600',
+  'from-gold-500 to-gold-600',
+];
+---
+
+<section id="equipo" class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+    <!-- Section header -->
+    <div class="text-center mb-14">
+      <span class="inline-block px-3 py-1 rounded-full bg-navy-50 text-navy-600 text-xs font-semibold uppercase tracking-wider mb-4 border border-navy-100">
+        {t.team.sectionBadge}
+      </span>
+      <h2 class="section-title">{t.team.title}</h2>
+      <p class="section-subtitle">{t.team.subtitle}</p>
+    </div>
+
+    <!-- Team cards -->
+    <div class="grid md:grid-cols-3 gap-6">
+      {t.team.members.map((member, i) => (
+        <article class="card text-center group">
+          <!-- Avatar -->
+          <div class={`w-20 h-20 rounded-2xl bg-gradient-to-br ${avatarColors[i]} flex items-center justify-center mx-auto mb-5 shadow-md`}>
+            <span class="text-2xl font-bold text-white">{member.initials}</span>
+          </div>
+
+          <!-- Role -->
+          <div class="text-xs font-semibold text-gold-500 uppercase tracking-wider mb-2">
+            {member.role}
+          </div>
+
+          <!-- Bio -->
+          <p class="text-sm text-slate-500 leading-relaxed mb-5">
+            {member.bio}
+          </p>
+
+          <!-- Highlights -->
+          <div class="flex flex-col gap-2">
+            {member.highlights.map((h) => (
+              <div class="flex items-center gap-2 text-xs text-slate-600">
+                <span class="w-1.5 h-1.5 rounded-full bg-gold-400 flex-shrink-0"></span>
+                {h}
+              </div>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

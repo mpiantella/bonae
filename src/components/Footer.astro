@@ -1,0 +1,51 @@
+---
+import type { Translations } from '../i18n/es';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+
+const anchors = ['#servicios', '#equipo', '#contacto'];
+---
+
+<footer class="bg-navy-800 text-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+
+      <!-- Brand -->
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-navy-600 flex items-center justify-center">
+            <span class="text-gold-400 font-bold text-base leading-none">N</span>
+          </div>
+          <span class="font-bold text-white text-lg tracking-tight">NOBAM</span>
+        </div>
+        <p class="text-blue-300 text-sm max-w-xs">{t.footer.tagline}</p>
+      </div>
+
+      <!-- Nav links -->
+      <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Footer navigation">
+        {t.footer.links.map((label, i) => (
+          <a href={anchors[i]} class="text-sm text-blue-300 hover:text-white transition-colors">
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Language toggle -->
+      <a
+        href={t.nav.langSwitchHref}
+        class="text-xs font-semibold px-3 py-1.5 rounded-full border border-white/20 text-blue-300 hover:text-white hover:border-white/40 transition-colors"
+      >
+        {t.nav.langSwitch}
+      </a>
+
+    </div>
+
+    <div class="mt-8 pt-6 border-t border-white/10 text-center text-xs text-blue-400">
+      {t.footer.copyright}
+    </div>
+  </div>
+</footer>
