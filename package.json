@@ -1,7 +1,7 @@
 {
-  "name": "nobam-website",
+  "name": "bonae-website",
   "version": "1.0.0",
-  "description": "NOBAM Digital Services - static website",
+  "description": "BONAE Digital Services - static website",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

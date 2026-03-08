@@ -2,10 +2,10 @@ import type { Translations } from './es';
 
 export const en: Translations = {
   lang: 'en',
-  siteName: 'NOBAM',
+  siteName: 'BONAE',
   siteTagline: 'Digital Services',
   metaDescription:
-    'NOBAM delivers high-quality digital services for Venezuelan businesses: custom software, CRM tools, digital marketing, and PMI-certified IT consulting.',
+    'BONAE delivers high-quality digital services for Venezuelan businesses: custom software, CRM tools, digital marketing, and PMI-certified IT consulting.',
 
   nav: {
     services: 'Services',
@@ -126,14 +126,14 @@ export const en: Translations = {
     title: 'Ready to get started?',
     subtitle: 'Tell us about your project. We respond the same day.',
     whatsappText: 'Chat with us on WhatsApp',
-    whatsappMessage: 'Hello NOBAM, I would like to learn more about your services.',
+    whatsappMessage: 'Hello BONAE, I would like to learn more about your services.',
     emailText: 'Or email us at',
-    email: 'hola@nobam.ve',
+    email: 'hola@bonae.ve',
   },
 
   footer: {
     tagline: 'Digital services for Venezuela today.',
     links: ['Services', 'Team', 'Contact'],
-    copyright: '© 2025 NOBAM. All rights reserved.',
+    copyright: '© 2025 BONAE. All rights reserved.',
   },
 };

@@ -1,5 +1,5 @@
-// NOBAM Service Worker - Cache-first strategy for offline support
-const CACHE_NAME = 'nobam-v1';
+// BONAE Service Worker - Cache-first strategy for offline support
+const CACHE_NAME = 'bonae-v1';
 
 // Assets to cache on install
 const PRECACHE_ASSETS = [
