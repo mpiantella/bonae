@@ -84,10 +84,11 @@ Free tier includes: unlimited bandwidth, unlimited sites, 500 builds/month, SSL,
 #### Ranked alternatives
 
 | Service	| LatAm CDN Coverage	| Free Tier |
-| Cloudflare Pages ⭐	Best (Anycast, 300+ PoP)	Unlimited BW
-| Vercel	Good (São Paulo region)	100GB BW/mo
-| Netlify	Good	100GB BW/mo
-| AWS S3 + CloudFront	Good (São Paulo, Buenos Aires)	12mo free trial
+|-----------|-----------------------|-----------|
+| Cloudflare Pages ⭐	| Best (Anycast, 300+ PoP)	| Unlimited BW |
+| Vercel	| Good (São Paulo region)	| 100GB BW/mo |
+| Netlify	| Good	| 100GB BW/mo |
+| AWS S3 + CloudFront	| Good (São Paulo, Buenos Aires)	| 12mo free trial |
 
 
 ### Deploying to Cloudflare Pages (3 steps)
@@ -104,3 +105,4 @@ Your Astro site builds to dist/ and requires zero config changes:
 - Node version env var: NODE_VERSION=18
 
 Every push to main auto-deploys. You get a free *.pages.dev URL immediately, and can add a custom domain later.
+
