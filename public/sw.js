@@ -1,5 +1,5 @@
-// BONAE Service Worker - Cache-first strategy for offline support
-const CACHE_NAME = 'bonae-v1';
+// BONAE TECH Service Worker - Cache-first strategy for offline support
+const CACHE_NAME = 'bonae tech-v1';
 
 // Assets to cache on install
 const PRECACHE_ASSETS = [

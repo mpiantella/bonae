@@ -1,6 +1,6 @@
-# BONAE Digital Services Website
+# BONAE TECH Digital Services Website
 
-This is the static website for BONAE Digital Services, built with Astro and Tailwind CSS.
+This is the static website for BONAE TECH Digital Services, built with Astro and Tailwind CSS.
 
 ## Development Setup
 

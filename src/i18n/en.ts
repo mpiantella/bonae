@@ -2,10 +2,10 @@ import type { Translations } from './es';
 
 export const en: Translations = {
   lang: 'en',
-  siteName: 'BONAE',
+  siteName: 'BONAE TECH',
   siteTagline: 'Digital Services',
   metaDescription:
-    'BONAE delivers high-quality digital services for Venezuelan businesses: custom software, CRM tools, digital marketing, and PMI-certified IT consulting.',
+    'BONAE TECH delivers high-quality digital services for Venezuelan businesses: custom software, CRM tools, digital marketing, and PMI-certified IT consulting.',
 
   nav: {
     services: 'Services',
@@ -126,14 +126,14 @@ export const en: Translations = {
     title: 'Ready to get started?',
     subtitle: 'Tell us about your project. We respond the same day.',
     whatsappText: 'Chat with us on WhatsApp',
-    whatsappMessage: 'Hello BONAE, I would like to learn more about your services.',
+    whatsappMessage: 'Hello BONAE TECH, I would like to learn more about your services.',
     emailText: 'Or email us at',
-    email: 'hola@bonae.ve',
+    email: 'hola@bonae tech.ve',
   },
 
   footer: {
     tagline: 'Digital services for Venezuela today.',
     links: ['Services', 'Team', 'Contact'],
-    copyright: '© 2025 BONAE. All rights reserved.',
+    copyright: '© 2025 BONAE TECH. All rights reserved.',
   },
 };

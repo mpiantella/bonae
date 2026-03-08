@@ -1,9 +1,9 @@
 export const es = {
   lang: 'es',
-  siteName: 'BONAE',
+  siteName: 'BONAE TECH',
   siteTagline: 'Servicios Digitales',
   metaDescription:
-    'BONAE ofrece servicios digitales de alta calidad para empresas venezolanas: software a medida, CRM, marketing digital y consultoría IT con metodología PMI.',
+    'BONAE TECH ofrece servicios digitales de alta calidad para empresas venezolanas: software a medida, CRM, marketing digital y consultoría IT con metodología PMI.',
 
   nav: {
     services: 'Servicios',
@@ -124,15 +124,15 @@ export const es = {
     title: '¿Listo para empezar?',
     subtitle: 'Cuéntanos tu proyecto. Te respondemos el mismo día.',
     whatsappText: 'Escríbenos por WhatsApp',
-    whatsappMessage: 'Hola BONAE, me gustaría conocer más sobre sus servicios.',
+    whatsappMessage: 'Hola BONAE TECH, me gustaría conocer más sobre sus servicios.',
     emailText: 'O escríbenos a',
-    email: 'hola@bonae.ve',
+    email: 'hola@bonae tech.ve',
   },
 
   footer: {
     tagline: 'Servicios digitales para el Venezuela de hoy.',
     links: ['Servicios', 'Equipo', 'Contacto'],
-    copyright: '© 2025 BONAE. Todos los derechos reservados.',
+    copyright: '© 2025 BONAE TECH. Todos los derechos reservados.',
   },
 } as const;
 

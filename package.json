@@ -1,7 +1,7 @@
 {
-  "name": "bonae-website",
+  "name": "bonae tech-website",
   "version": "1.0.0",
-  "description": "BONAE Digital Services - static website",
+  "description": "BONAE TECH Digital Services - static website",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
