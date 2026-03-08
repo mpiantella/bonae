@@ -105,4 +105,3 @@ Your Astro site builds to dist/ and requires zero config changes:
 - Node version env var: NODE_VERSION=18
 
 Every push to main auto-deploys. You get a free *.pages.dev URL immediately, and can add a custom domain later.
-
