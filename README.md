@@ -105,3 +105,32 @@ Your Astro site builds to dist/ and requires zero config changes:
 - Node version env var: NODE_VERSION=18
 
 Every push to main auto-deploys. You get a free *.pages.dev URL immediately, and can add a custom domain later.
+
+## Styles
+
+Fonts
+
+```
+# one
+font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+# two
+font-family: 'Poppins', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+```
+
+🧩 Recommended Pairings
+To keep things simple and modern:
+
+**Option A** — Clean & Friendly
+Headlines: Poppins SemiBold
+Body: Inter Regular
+UI Labels: Inter Medium
+
+**Option B** — Sleek & Professional
+- Headlines: Montserrat SemiBold
+- Body: Inter Regular
+- Buttons: Inter Medium
+
+**Option C** — Ultra‑Lightweight (Lowest Bandwidth)
+- Headlines: Segoe UI Bold
+- Body: Segoe UI Regular
+- No external font downloads needed

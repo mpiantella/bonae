@@ -1,0 +1,38 @@
+---
+import type { Translations } from '../i18n/es';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+---
+
+<section id="portafolio" class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-14">
+      <span class="inline-block px-3 py-1 rounded-full bg-navy-50 text-navy-600 text-xs font-semibold uppercase tracking-wider mb-4 border border-navy-100">
+        {t.portfolio.sectionBadge}
+      </span>
+      <h2 class="section-title">{t.portfolio.title}</h2>
+      <p class="section-subtitle">{t.portfolio.subtitle}</p>
+    </div>
+
+    <div class="card max-w-2xl mx-auto text-center py-12 px-6">
+      <p class="text-slate-600 mb-8">{t.portfolio.comingSoon}</p>
+    </div>
+
+    <div class="mt-12">
+      <h3 class="text-lg font-bold text-navy-600 text-center mb-6">
+        {t.portfolio.industries.title}
+      </h3>
+      <div class="flex flex-wrap justify-center gap-3">
+        {t.portfolio.industries.items.map((ind) => (
+          <span class="px-4 py-2 rounded-full bg-navy-50 text-navy-600 text-sm font-medium border border-navy-100">
+            {ind}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+---
+import type { Translations } from '../i18n/es';
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+---
+
+<section class="py-16 bg-navy-600 text-white">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+      <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
+        <div class="text-3xl md:text-4xl font-bold text-gold-300">{t.keyFigures.years}</div>
+        <div class="text-sm text-blue-200 mt-1">{t.keyFigures.yearsLabel}</div>
+      </div>
+      <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
+        <div class="text-3xl md:text-4xl font-bold text-gold-300">—</div>
+        <div class="text-sm text-blue-200 mt-1">{t.keyFigures.clients}</div>
+      </div>
+      <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
+        <div class="text-3xl md:text-4xl font-bold text-gold-300">—</div>
+        <div class="text-sm text-blue-200 mt-1">{t.keyFigures.projects}</div>
+      </div>
+      <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 col-span-2 lg:col-span-1">
+        <div class="text-3xl md:text-4xl font-bold text-gold-300">—</div>
+        <div class="text-sm text-blue-200 mt-1">{t.keyFigures.presenceLabel}</div>
+      </div>
+    </div>
+  </div>
+</section>
