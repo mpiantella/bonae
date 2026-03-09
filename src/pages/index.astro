@@ -2,9 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import ValueProp from '../components/ValueProp.astro';
+import ServicesSummary from '../components/ServicesSummary.astro';
+import KeyFigures from '../components/KeyFigures.astro';
+import About from '../components/About.astro';
 import Services from '../components/Services.astro';
-import Team from '../components/Team.astro';
-import WhyUs from '../components/WhyUs.astro';
+import Portfolio from '../components/Portfolio.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Plans from '../components/Plans.astro';
+import BlogPreview from '../components/BlogPreview.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { es } from '../i18n/es';
@@ -17,9 +23,15 @@ const whatsappHref = `https://wa.me/584140000000?text=${encodeURIComponent(t.con
   <Header t={t} />
   <main>
     <Hero t={t} whatsappHref={whatsappHref} />
+    <ValueProp t={t} />
+    <ServicesSummary t={t} />
+    <KeyFigures t={t} />
+    <About t={t} />
     <Services t={t} />
-    <Team t={t} />
-    <WhyUs t={t} />
+    <Portfolio t={t} />
+    <Testimonials t={t} />
+    <Plans t={t} whatsappHref={whatsappHref} />
+    <BlogPreview t={t} />
     <Contact t={t} whatsappHref={whatsappHref} />
   </main>
   <Footer t={t} />

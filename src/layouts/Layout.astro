@@ -1,21 +1,25 @@
 ---
 import '../styles/global.css';
 import type { Translations } from '../i18n/es';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import CookieBanner from '../components/CookieBanner.astro';
 
 interface Props {
   t: Translations;
 }
 
 const { t } = Astro.props;
+const whatsappHref = `https://wa.me/584140000000?text=${encodeURIComponent(t.contact.whatsappMessage)}`;
 const isEn = t.lang === 'en';
 const canonicalES = Astro.site ? new URL('/', Astro.site).href : '/';
 const canonicalEN = Astro.site ? new URL('/en/', Astro.site).href : '/en/';
 ---
 
 <!doctype html>
-<html lang={t.lang} class="scroll-smooth">
+<html lang={t.lang} class="scroll-smooth" translate="no">
   <head>
     <meta charset="UTF-8" />
+    <meta name="google" content="notranslate" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={t.metaDescription} />
     <meta name="theme-color" content="#1E3A5F" />
@@ -41,6 +45,8 @@ const canonicalEN = Astro.site ? new URL('/en/', Astro.site).href : '/en/';
   </head>
   <body class="min-h-screen flex flex-col">
     <slot />
+    <WhatsAppFloat href={whatsappHref} />
+    <CookieBanner t={t} />
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {

@@ -1,138 +1,305 @@
 export const es = {
   lang: 'es',
   siteName: 'BONAE TECH',
-  siteTagline: 'Servicios Digitales',
+  siteTagline: 'Tecnología accesible para tu negocio',
   metaDescription:
-    'BONAE TECH ofrece servicios digitales de alta calidad para empresas venezolanas: software a medida, CRM, marketing digital y consultoría IT con metodología PMI.',
+    'BONAE TECH: tecnología accesible para tu negocio. Tres hermanas con más de 30 años de experiencia combinada. Digitalización, sitios web, CRM y consultoría para PyMEs en Venezuela y Latinoamérica.',
 
   nav: {
+    home: 'Inicio',
+    about: 'Nosotras',
     services: 'Servicios',
-    team: 'Equipo',
+    portfolio: 'Portafolio',
+    blog: 'Blog',
     contact: 'Contacto',
+    cta: 'Contáctanos',
+    clients: 'Clientes',
+    team: 'Equipo',
     langSwitch: 'EN',
     langSwitchHref: '/en/',
   },
 
   hero: {
-    badge: 'Tecnología que funciona en Venezuela',
-    headline: 'Transformamos tu negocio con soluciones digitales confiables',
+    badge: 'Venezuela · Latinoamérica · Mundo',
+    headline: 'Tecnología accesible para tu negocio',
     subheadline:
-      'Combinamos 15 años de experiencia en tecnología financiera, gestión de proyectos PMI y visión emprendedora para ofrecerte servicios digitales adaptados a la realidad venezolana.',
-    cta: 'Escríbenos por WhatsApp',
+      'Sin complicaciones, sin costos exagerados. Tres hermanas con más de 30 años de experiencia combinada en tecnología, hotelería y emprendimiento, unidas para modernizar y digitalizar negocios en Venezuela, Latinoamérica y más allá.',
+    cta: 'Contáctanos ahora',
+    ctaSecondary: 'Conoce nuestros servicios',
     ctaSub: 'Te respondemos el mismo día',
   },
 
-  services: {
-    sectionBadge: 'Catálogo de Servicios',
-    title: 'Lo que podemos hacer por ti',
-    subtitle:
-      'Soluciones diseñadas para el mercado venezolano, con tecnología de nivel internacional y precios adaptados a nuestra realidad.',
+  valueProp: {
+    sectionBadge: 'Nuestra propuesta',
+    title: 'Por qué elegirnos',
     items: [
       {
-        icon: 'crm',
-        title: 'SaaS / CRM para PYMEs',
-        description:
-          'Herramientas en la nube para gestionar clientes, ventas y operaciones. Diseñadas para restaurantes, comercios y pequeñas empresas. Funciona con conexión lenta y tiene modo sin conexión.',
-        tags: ['Gestión de clientes', 'Pipeline de ventas', 'Facturación', 'Reportes'],
+        icon: 'accessible',
+        title: 'Accesible',
+        description: 'No necesitas quebrar la alcancía para digitalizarte.',
       },
       {
-        icon: 'marketing',
-        title: 'Marketing Digital',
-        description:
-          'Estrategia y gestión de redes sociales, creación de contenido, publicidad digital en Instagram, TikTok y WhatsApp. Alcanza a tus clientes donde ya están.',
-        tags: ['Redes sociales', 'Contenido', 'Publicidad digital', 'WhatsApp Business'],
+        icon: 'simple',
+        title: 'Simple',
+        description: 'Hacemos la tecnología fácil para que tú te enfoques en tu negocio.',
       },
       {
-        icon: 'code',
-        title: 'Desarrollo de Software',
-        description:
-          'Aplicaciones web y móviles a medida, integraciones de sistemas y automatización de procesos. Calidad de ingeniería financiera internacional, construida para el contexto local.',
-        tags: ['Web apps', 'Apps móviles', 'Integraciones', 'Automatización'],
+        icon: 'secure',
+        title: 'Seguro',
+        description: 'Tus datos y los de tus clientes protegidos con estándares internacionales.',
       },
       {
-        icon: 'consulting',
-        title: 'Consultoría IT y Gestión de Proyectos',
-        description:
-          'Asesoría tecnológica y dirección de proyectos con metodología PMI. Llevamos tus iniciativas digitales del concepto a la entrega con disciplina, transparencia y resultados medibles.',
-        tags: ['PMI certificado', 'Arquitectura IT', 'Transformación digital', 'Auditoría'],
+        icon: 'close',
+        title: 'Cercano',
+        description: 'Entendemos al venezolano y al latinoamericano, desde la empresa grande hasta el puesto de pepitos en la esquina.',
       },
     ],
   },
 
-  team: {
+  servicesSummary: {
+    sectionBadge: 'Lo que hacemos',
+    title: 'Servicios destacados',
+    subtitle: 'Soluciones pensadas para pequeñas y medianas empresas.',
+    items: [
+      { icon: 'web', title: 'Sitios Web', description: 'Diseño y desarrollo de sitios modernos, responsivos y optimizados.' },
+      { icon: 'social', title: 'Redes Sociales', description: 'Estrategias para Instagram, Facebook, WhatsApp Business y más.' },
+      { icon: 'crm', title: 'CRM', description: 'Gestión de clientes y seguimiento de ventas sin sistemas complejos.' },
+      { icon: 'consulting', title: 'Consultoría Digital', description: 'Evaluación y acompañamiento en tu transformación digital.' },
+    ],
+  },
+
+  keyFigures: {
+    years: '30+',
+    yearsLabel: 'Años de experiencia combinada',
+    clients: 'Clientes',
+    projects: 'Proyectos completados',
+    presence: 'Países',
+    presenceLabel: 'Presencia regional',
+  },
+
+  about: {
     sectionBadge: 'Quiénes somos',
-    title: 'Un equipo con experiencia real',
-    subtitle:
-      'Somos tres hermanas venezolanas con trayectorias distintas y un objetivo común: construir soluciones digitales que funcionen de verdad.',
+    title: 'Nosotras',
+    history: {
+      title: 'Nuestra historia',
+      content:
+        'Tres hermanas con formación técnica, visión emprendedora y especialización en hotelería decidieron unirse para cerrar la brecha digital en Venezuela y Latinoamérica. Vivimos los mismos desafíos que tus clientes y diseñamos para ellos.',
+    },
+    mission: {
+      title: 'Misión',
+      content:
+        'Llevar modernización y servicios de digitalización a pequeñas y medianas empresas en Venezuela, Latinoamérica y el mundo, haciendo que la tecnología sea accesible, asequible y efectiva.',
+    },
+    vision: {
+      title: 'Visión',
+      content:
+        'Ser el aliado tecnológico de referencia para las PyMEs latinoamericanas, combinando prácticas internacionales con el entendimiento profundo de las necesidades locales.',
+    },
+    values: {
+      title: 'Valores',
+      items: [
+        'Accesibilidad: tecnología al alcance de todos',
+        'Integridad: transparencia en cada interacción',
+        'Seguridad: protección de datos como prioridad',
+        'Innovación con propósito: modernización que resuelve problemas reales',
+        'Cercanía: entendemos tu contexto porque lo vivimos',
+      ],
+    },
     members: [
       {
         initials: 'IS',
-        role: 'Ingeniera de Software',
-        bio: '15 años de experiencia en la industria de servicios financieros. Experta en arquitectura de sistemas, desarrollo backend y estándares de calidad empresarial aplicados a la realidad venezolana.',
-        highlights: ['15 años en fintech', 'Arquitectura de sistemas', 'Calidad empresarial'],
+        role: 'Tecnología',
+        bio: 'Más de 15 años en la industria tecnológica. Experta en arquitectura de sistemas, desarrollo y estándares de calidad empresarial aplicados al contexto local.',
+        highlights: ['Arquitectura de sistemas', 'Desarrollo backend', 'Calidad empresarial'],
       },
       {
         initials: 'IE',
-        role: 'Ingeniera de Sistemas · PMP',
-        bio: 'Ingeniera de Sistemas con certificación PMP del PMI Institute. Especializada en gestión de proyectos tecnológicos, planificación estratégica y entrega de resultados bajo metodologías internacionales.',
-        highlights: ['PMP certificada', 'Gestión de proyectos', 'PMI Institute'],
+        role: 'Gestión de proyectos · PMP',
+        bio: 'Ingeniera de Sistemas con certificación PMP. Especializada en gestión de proyectos tecnológicos, planificación estratégica y entrega con metodologías internacionales.',
+        highlights: ['PMP certificada', 'Metodología PMI', 'Gestión de proyectos'],
       },
       {
         initials: 'TH',
-        role: 'Emprendedora · Turismo y Hospitalidad',
-        bio: 'Profesional en Turismo y Hospitalidad con espíritu emprendedor. Aporta visión de negocio, orientación al cliente y experiencia práctica construyendo y operando empresas de servicio en Venezuela.',
+        role: 'Hotelería y emprendimiento',
+        bio: 'Profesional en Turismo y Hospitalidad con espíritu emprendedor. Visión de negocio, orientación al cliente y experiencia construyendo empresas de servicio en Venezuela.',
         highlights: ['Visión de negocio', 'Orientación al cliente', 'Emprendimiento local'],
       },
     ],
   },
 
-  whyUs: {
-    sectionBadge: 'Por qué elegirnos',
-    title: 'Construido para Venezuela',
-    subtitle:
-      'No somos una consultora extranjera. Vivimos los mismos desafíos que tus clientes y diseñamos para ellos.',
-    items: [
+  services: {
+    sectionBadge: 'Catálogo de Servicios',
+    title: 'Nuestros servicios',
+    subtitle: 'Soluciones integrales para la digitalización de tu negocio.',
+    presenceDigital: {
+      title: 'Presencia Digital',
+      items: [
+        {
+          title: 'Diseño y Desarrollo de Sitios Web',
+          description: 'Sitios modernos, responsivos y optimizados para móviles. Desde páginas informativas hasta catálogos de productos. No tiene que ser complejo ni costoso para verse profesional.',
+        },
+        {
+          title: 'Gestión de Redes Sociales',
+          description: 'Estrategias y marcos de trabajo para redes sociales que conecten tu negocio con tus clientes donde ellos están: Instagram, Facebook, WhatsApp Business, TikTok y más.',
+        },
+        {
+          title: 'Optimización para Buscadores (SEO)',
+          description: 'Posicionamiento en Google y otros buscadores para que te encuentren cuando te busquen.',
+        },
+      ],
+    },
+    webDigital: {
+      title: 'Servicios Web Digitales',
+      items: [
+        {
+          title: 'Aplicaciones Web Progresivas (PWA)',
+          description: 'Sitios que funcionan como aplicaciones, incluso sin conexión. Tus clientes pueden "instalar" tu sitio en su teléfono sin tiendas de aplicaciones.',
+        },
+        {
+          title: 'Integración con Plataformas de Pago',
+          description: 'Conexión con métodos de pago locales e internacionales.',
+        },
+        {
+          title: 'Formularios y Automatización',
+          description: 'Digitaliza tus procesos. Deja el papel y el lápiz atrás: todo se puede registrar, rastrear y consultar en línea.',
+        },
+      ],
+    },
+    crm: {
+      title: 'Soluciones CRM',
+      items: [
+        {
+          title: 'CRM para Pequeños Negocios',
+          description: 'Herramientas simples para gestionar tus clientes, hacer seguimiento de ventas y mantener la relación sin sistemas complejos.',
+        },
+        {
+          title: 'Gestión de Contactos y Clientes',
+          description: 'Base de datos organizada y segura de tus clientes y prospectos.',
+        },
+        {
+          title: 'Reportes y Seguimiento',
+          description: 'Paneles sencillos para ver cómo va tu negocio de un vistazo.',
+        },
+      ],
+    },
+    consulting: {
+      title: 'Consultoría y Estrategia Digital',
+      items: [
+        {
+          title: 'Evaluación de Madurez Digital',
+          description: 'Diagnóstico de dónde está tu negocio hoy y qué pasos seguir para digitalizarte.',
+        },
+        {
+          title: 'Acompañamiento en la Transformación Digital',
+          description: 'No te dejamos solo: te guiamos paso a paso en el proceso.',
+        },
+      ],
+    },
+    expansion: 'Nuestro portafolio de servicios está en constante crecimiento para adaptarse a las necesidades de los clientes, en cualquier plataforma donde se encuentren.',
+  },
+
+  portfolio: {
+    sectionBadge: 'Nuestro trabajo',
+    title: 'Portafolio',
+    subtitle: 'Proyectos que reflejan nuestro compromiso con la excelencia.',
+    industries: {
+      title: 'Industrias atendidas',
+      items: ['Hotelería y turismo', 'Comercio y retail', 'Gastronomía y restaurantes', 'Servicios profesionales', 'Emprendimientos y startups', 'Otros'],
+    },
+    comingSoon: 'Proyectos destacados próximamente. Contáctanos para conocer casos de éxito.',
+  },
+
+  testimonials: {
+    sectionBadge: 'Lo que dicen',
+    title: 'Testimonios',
+    subtitle: 'Historias de clientes que han confiado en nosotros.',
+    comingSoon: 'Testimonios próximamente. Sé el primero en compartir tu experiencia con Bonae Tech.',
+  },
+
+  plans: {
+    sectionBadge: 'Planes',
+    title: 'Planes y precios',
+    subtitle: 'Nuestros precios están diseñados para que digitalizar tu negocio no sea un lujo sino una inversión inteligente.',
+    packages: [
       {
-        icon: 'signal',
-        title: 'Optimizado para baja conectividad',
-        description:
-          'Nuestras soluciones funcionan en redes 3G y tienen modo sin conexión para los cortes de luz y de internet.',
+        name: 'Básico',
+        description: 'Presencia digital esencial: sitio web sencillo y configuración de redes.',
       },
       {
-        icon: 'shield',
-        title: 'Calidad de nivel financiero',
-        description:
-          'Aplicamos los estándares de ingeniería de la industria financiera internacional a cada proyecto que desarrollamos.',
+        name: 'Profesional',
+        description: 'Sitio web completo + redes sociales + CRM básico.',
       },
       {
-        icon: 'chart',
-        title: 'Entrega con metodología PMI',
-        description:
-          'Proyectos planificados, ejecutados y entregados con disciplina certificada. Sin sorpresas, con resultados medibles.',
-      },
-      {
-        icon: 'local',
-        title: 'Conocimiento del mercado local',
-        description:
-          'Entendemos los métodos de pago venezolanos (USDT, Zelle, Zinli, Pago Móvil) y los integramos desde el día uno.',
+        name: 'Empresarial',
+        description: 'Solución integral personalizada.',
       },
     ],
+    cta: 'Solicitar cotización',
+    ctaSub: 'Agenda una consulta gratuita',
+    note: 'Contáctanos para una cotización personalizada según las necesidades de tu negocio.',
   },
 
   contact: {
     sectionBadge: 'Contacto',
     title: '¿Listo para empezar?',
     subtitle: 'Cuéntanos tu proyecto. Te respondemos el mismo día.',
+    form: {
+      name: 'Nombre completo',
+      email: 'Correo electrónico',
+      phone: 'Teléfono / WhatsApp',
+      business: 'Nombre del negocio (opcional)',
+      serviceType: 'Tipo de servicio',
+      message: 'Mensaje',
+      submit: 'Enviar mensaje',
+      serviceOptions: [
+        'Sitio web',
+        'Redes sociales',
+        'CRM',
+        'Consultoría digital',
+        'Otro',
+      ],
+    },
     whatsappText: 'Escríbenos por WhatsApp',
     whatsappMessage: 'Hola BONAE TECH, me gustaría conocer más sobre sus servicios.',
     emailText: 'O escríbenos a',
-    email: 'hola@bonae tech.ve',
+    email: 'hola@bonaetech.ve',
+    phone: '+58 414 000 0000',
+    hours: 'Horario de atención',
+    location: 'Venezuela · Latinoamérica · Mundo',
+    locationNote: 'Atendemos clientes de forma remota en toda Venezuela, Latinoamérica y el mundo.',
   },
 
   footer: {
-    tagline: 'Servicios digitales para el Venezuela de hoy.',
-    links: ['Servicios', 'Equipo', 'Contacto'],
+    tagline: 'Tecnología accesible para tu negocio. Sin complicaciones, sin costos exagerados.',
+    description: 'Digitalización para PyMEs en Venezuela y Latinoamérica.',
+    nav: {
+      title: 'Navegación',
+      home: 'Inicio',
+      about: 'Nosotras',
+      services: 'Servicios',
+      portfolio: 'Portafolio',
+      blog: 'Blog',
+      contact: 'Contacto',
+    },
+    services: {
+      title: 'Servicios',
+      web: 'Sitios Web',
+      social: 'Redes Sociales',
+      crm: 'CRM',
+      consulting: 'Consultoría Digital',
+    },
+    legal: {
+      privacy: 'Política de Privacidad',
+      terms: 'Términos y Condiciones',
+      cookies: 'Política de Cookies',
+    },
     copyright: '© 2025 BONAE TECH. Todos los derechos reservados.',
+  },
+
+  cookieBanner: {
+    message: 'Usamos cookies para mejorar tu experiencia. Al continuar, aceptas nuestro uso de cookies.',
+    accept: 'Aceptar',
+    privacy: 'Política de Privacidad',
   },
 } as const;
 
