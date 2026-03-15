@@ -24,10 +24,10 @@ const icons: Record<string, string> = {
 };
 ---
 
-<section id="servicios" class="py-20 bg-slate-50">
+<section id="servicios" class="py-20 bg-cream">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-14">
-      <span class="inline-block px-3 py-1 rounded-full bg-navy-50 text-navy-600 text-xs font-semibold uppercase tracking-wider mb-4 border border-navy-100">
+      <span class="inline-block px-3 py-1 rounded-full bg-white text-dark-blue text-xs font-semibold uppercase tracking-wider mb-4 border border-light-blue/20">
         {t.servicesSummary.sectionBadge}
       </span>
       <h2 class="section-title">{t.servicesSummary.title}</h2>
@@ -36,11 +36,11 @@ const icons: Record<string, string> = {
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {t.servicesSummary.items.map((item) => (
         <a href={`${baseHref}#servicios-completos`} class="card group block text-left no-underline">
-          <div class="w-12 h-12 rounded-xl bg-navy-50 text-navy-600 flex items-center justify-center mb-5 group-hover:bg-navy-600 group-hover:text-white transition-all duration-300">
+          <div class="w-12 h-12 rounded-xl bg-cream text-dark-blue flex items-center justify-center mb-5 group-hover:bg-dark-blue group-hover:text-white transition-all duration-300">
             <Fragment set:html={icons[item.icon]} />
           </div>
-          <h3 class="text-lg font-bold text-slate-800 mb-2 group-hover:text-navy-600">{item.title}</h3>
-          <p class="text-slate-500 text-sm leading-relaxed">{item.description}</p>
+          <h3 class="text-lg font-bold text-pacificblue mb-2 group-hover:text-dark-blue">{item.title}</h3>
+          <p class="text-pacificblue text-sm leading-relaxed">{item.description}</p>
         </a>
       ))}
     </div>

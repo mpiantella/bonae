@@ -11,7 +11,7 @@ const { t } = Astro.props;
 <section id="servicios-completos" class="py-20 bg-white">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="text-center mb-14">
-      <span class="inline-block px-3 py-1 rounded-full bg-navy-50 text-navy-600 text-xs font-semibold uppercase tracking-wider mb-4 border border-navy-100">
+      <span class="inline-block px-3 py-1 rounded-full bg-cream text-dark-blue text-xs font-semibold uppercase tracking-wider mb-4 border border-light-blue/20">
         {t.services.sectionBadge}
       </span>
       <h2 class="section-title">{t.services.title}</h2>
@@ -21,12 +21,12 @@ const { t } = Astro.props;
     <div class="space-y-16">
       <!-- Presencia Digital -->
       <div>
-        <h3 class="text-xl font-bold text-navy-600 mb-6">{t.services.presenceDigital.title}</h3>
+        <h3 class="text-xl font-bold text-dark-blue mb-6">{t.services.presenceDigital.title}</h3>
         <div class="grid md:grid-cols-3 gap-6">
           {t.services.presenceDigital.items.map((item) => (
             <article class="card">
-              <h4 class="font-bold text-slate-800 mb-2">{item.title}</h4>
-              <p class="text-slate-500 text-sm leading-relaxed">{item.description}</p>
+              <h4 class="font-bold text-pacificblue mb-2">{item.title}</h4>
+              <p class="text-pacificblue text-sm leading-relaxed">{item.description}</p>
             </article>
           ))}
         </div>
@@ -34,12 +34,12 @@ const { t } = Astro.props;
 
       <!-- Servicios Web Digitales -->
       <div>
-        <h3 class="text-xl font-bold text-navy-600 mb-6">{t.services.webDigital.title}</h3>
+        <h3 class="text-xl font-bold text-dark-blue mb-6">{t.services.webDigital.title}</h3>
         <div class="grid md:grid-cols-3 gap-6">
           {t.services.webDigital.items.map((item) => (
             <article class="card">
-              <h4 class="font-bold text-slate-800 mb-2">{item.title}</h4>
-              <p class="text-slate-500 text-sm leading-relaxed">{item.description}</p>
+              <h4 class="font-bold text-pacificblue mb-2">{item.title}</h4>
+              <p class="text-pacificblue text-sm leading-relaxed">{item.description}</p>
             </article>
           ))}
         </div>
@@ -47,12 +47,12 @@ const { t } = Astro.props;
 
       <!-- Soluciones CRM -->
       <div>
-        <h3 class="text-xl font-bold text-navy-600 mb-6">{t.services.crm.title}</h3>
+        <h3 class="text-xl font-bold text-dark-blue mb-6">{t.services.crm.title}</h3>
         <div class="grid md:grid-cols-3 gap-6">
           {t.services.crm.items.map((item) => (
             <article class="card">
-              <h4 class="font-bold text-slate-800 mb-2">{item.title}</h4>
-              <p class="text-slate-500 text-sm leading-relaxed">{item.description}</p>
+              <h4 class="font-bold text-pacificblue mb-2">{item.title}</h4>
+              <p class="text-pacificblue text-sm leading-relaxed">{item.description}</p>
             </article>
           ))}
         </div>
@@ -60,18 +60,18 @@ const { t } = Astro.props;
 
       <!-- Consultoría -->
       <div>
-        <h3 class="text-xl font-bold text-navy-600 mb-6">{t.services.consulting.title}</h3>
+        <h3 class="text-xl font-bold text-dark-blue mb-6">{t.services.consulting.title}</h3>
         <div class="grid md:grid-cols-2 gap-6">
           {t.services.consulting.items.map((item) => (
             <article class="card">
-              <h4 class="font-bold text-slate-800 mb-2">{item.title}</h4>
-              <p class="text-slate-500 text-sm leading-relaxed">{item.description}</p>
+              <h4 class="font-bold text-pacificblue mb-2">{item.title}</h4>
+              <p class="text-pacificblue text-sm leading-relaxed">{item.description}</p>
             </article>
           ))}
         </div>
       </div>
 
-      <p class="text-center text-slate-500 text-sm italic max-w-2xl mx-auto">
+      <p class="text-center text-pacificblue text-sm italic max-w-2xl mx-auto">
         {t.services.expansion}
       </p>
     </div>

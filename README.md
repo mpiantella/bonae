@@ -191,8 +191,30 @@ font-family: 'Poppins', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 * mid-blue: #3996AE
 * light-blue: #48A8C1
 * dar-blue: #44808F
-* gray: #40575D
+* pacificblue: #40575D
 * cream: #F4F4ED
+
+BDD0D5,3C707D,3C6F7B,DEEAED,518490
+#### tailwind
+Favorite: 40575D
+
+{
+  "dark-slate-grey": {
+    "50": "#f0f4f5",
+    "100": "#e1e8ea",
+    "200": "#c3d2d5",
+    "300": "#a5bbc0",
+    "400": "#87a4ab",
+    "500": "#698d96",
+    "600": "#547178",
+    "700": "#3f555a",
+    "800": "#2a393c",
+    "900": "#151c1e",
+    "950": "#0f1415"
+  }
+}
+
+
 
 🧩 Recommended Pairings
 To keep things simple and modern:

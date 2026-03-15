@@ -4,8 +4,8 @@
   "description": "Servicios digitales para empresas venezolanas",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAFAFA",
-  "theme_color": "#1E3A5F",
+  "background_color": "#F4F4ED",
+  "theme_color": "#44808F",
   "icons": [
     {
       "src": "/favicon.svg",
