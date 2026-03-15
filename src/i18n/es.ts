@@ -262,7 +262,7 @@ export const es = {
     whatsappText: 'Escríbenos por WhatsApp',
     whatsappMessage: 'Hola BONAE TECH, me gustaría conocer más sobre sus servicios.',
     emailText: 'O escríbenos a',
-    email: 'hola@bonaetech.ve',
+    email: 'hola@bonaetech.com',
     phone: '+58 414 000 0000',
     hours: 'Horario de atención',
     location: 'Venezuela · Latinoamérica · Mundo',

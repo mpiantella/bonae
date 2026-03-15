@@ -1,6 +1,73 @@
 # BONAE TECH Digital Services Website
 
-This is the static website for BONAE TECH Digital Services, built with Astro and Tailwind CSS.
+This is the static website for BONAE TECH Digital Services, built with Astro and Tailwind CSS. Deployed on Cloudflare Pages.
+
+## Design Principles
+
+- **Mobile-first**: The majority of Latin American traffic is mobile. Layouts and components are designed for small screens first, then enhanced for desktop.
+- **Low-bandwidth friendly**: Optimized for 3G/4G connections. Minimal external assets, inline critical styles, and PWA support for offline use.
+- **Accessibility (WCAG 2.1 AA)**: Semantic HTML, ARIA labels, focus states, and sufficient color contrast. Forms and interactive elements are keyboard-navigable.
+- **Bilingual by default**: Spanish (primary) and English with clear language switching and proper `hreflang` for SEO.
+- **Cercano y profesional**: Tone is approachable and empowering—digitalization is within reach. Avoid unnecessary jargon; explain technical terms when used.
+- **Trust signals**: Clear value propositions, founder profiles, contact options, and visible CTAs (WhatsApp, contact form) to reduce friction.
+
+## Architecture
+
+### Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Static generator | Astro 4.x |
+| Styling | Tailwind CSS |
+| Hosting | Cloudflare Pages |
+| Output | Static HTML (no client-side routing) |
+
+### Page Structure
+
+- **Spanish**: `/` (index)
+- **English**: `/en/`
+- Single-page layout per language: all sections (Hero, Value Prop, Services, About, Portfolio, Plans, Contact) are rendered on the homepage with anchor navigation.
+
+### i18n
+
+- Translation files: `src/i18n/es.ts` (source) and `src/i18n/en.ts`
+- Shared `Translations` type ensures both languages stay in sync
+- Each page imports the relevant translation object and passes it as `t` to Layout and components
+- No runtime i18n library; content is compiled at build time
+
+### Component Hierarchy
+
+```
+Layout.astro (HTML shell, meta, PWA, WhatsApp float, Cookie banner)
+├── Header.astro (nav, language switch, CTA)
+├── <main>
+│   ├── Hero.astro
+│   ├── ValueProp.astro
+│   ├── ServicesSummary.astro
+│   ├── KeyFigures.astro
+│   ├── About.astro
+│   ├── Services.astro
+│   ├── Portfolio.astro
+│   ├── Testimonials.astro
+│   ├── Plans.astro
+│   ├── BlogPreview.astro
+│   └── Contact.astro
+└── Footer.astro (4-column: brand, nav, services, contact)
+```
+
+### Data Flow
+
+- No CMS or backend; all content lives in `src/i18n/*.ts`
+- Components receive `t: Translations` as a prop and render text from `t.*`
+- Placeholder values (phone, email, social links) can be updated in i18n or environment variables
+
+### PWA & Performance
+
+- `manifest.webmanifest` and `sw.js` for installability and offline support
+- `compressHTML: true` and `inlineStylesheets: 'auto'` in Astro config
+- Target: Lighthouse performance > 90, load time < 3s on 3G
+
+---
 
 ## Development Setup
 
@@ -14,7 +81,7 @@ This is the static website for BONAE TECH Digital Services, built with Astro and
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd noabem
+   cd bonae
    ```
 
 2. Install dependencies:
@@ -108,7 +175,7 @@ Every push to main auto-deploys. You get a free *.pages.dev URL immediately, and
 
 ## Styles
 
-Fonts
+### Fonts
 
 ```
 # one
@@ -116,6 +183,16 @@ font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 # two
 font-family: 'Poppins', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 ```
+
+### Pallete 
+
+* terracota: #FF6B35
+* brown: #9C8172
+* mid-blue: #3996AE
+* light-blue: #48A8C1
+* dar-blue: #44808F
+* gray: #40575D
+* cream: #F4F4ED
 
 🧩 Recommended Pairings
 To keep things simple and modern:

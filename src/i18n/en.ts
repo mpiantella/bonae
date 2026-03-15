@@ -264,7 +264,7 @@ export const en: Translations = {
     whatsappText: 'WhatsApp us',
     whatsappMessage: 'Hello BONAE TECH, I would like to learn more about your services.',
     emailText: 'Or email us at',
-    email: 'hola@bonaetech.ve',
+    email: 'hola@bonaetech.com',
     phone: '+58 414 000 0000',
     hours: 'Business hours',
     location: 'Venezuela · Latin America · World',
