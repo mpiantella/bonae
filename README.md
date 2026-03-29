@@ -21,6 +21,7 @@ This is the static website for BONAE TECH Digital Services, built with Astro and
 | Styling | Tailwind CSS |
 | Hosting | Cloudflare Pages |
 | Output | Static HTML (no client-side routing) |
+| Backend (optional) | AWS: Cognito + API Gateway + Lambda + DynamoDB — see [infra/README.md](infra/README.md) |
 
 ### Page Structure
 
@@ -57,9 +58,15 @@ Layout.astro (HTML shell, meta, PWA, WhatsApp float, Cookie banner)
 
 ### Data Flow
 
-- No CMS or backend; all content lives in `src/i18n/*.ts`
-- Components receive `t: Translations` as a prop and render text from `t.*`
-- Placeholder values (phone, email, social links) can be updated in i18n or environment variables
+- Default copy lives in `src/i18n/es.ts` and `src/i18n/en.ts`. At build time, `npm run merge:i18n` deep-merges optional overrides into `src/i18n/generated/*.merged.ts` (used by pages).
+- Overrides come from DynamoDB **published** JSON when you run `npm run fetch:i18n` (for example in CI), or from a local `i18n-overrides.json` for testing.
+- Components receive `t: Translations` as a prop and render text from `t.*`.
+
+### AWS backend and admin (optional)
+
+- **Infrastructure**: CDK app in [`infra/`](infra/README.md) — Cognito user pool, `administrators` group, HTTP API (Lambda), DynamoDB for profiles and draft/published content, Secrets Manager for GitHub token + repo.
+- **Admin UI**: React/Vite app in [`apps/admin`](apps/admin/) — sign-in with Cognito, edit hero/contact draft per locale, save draft, **Publicar sitio** copies drafts to published and triggers GitHub `repository_dispatch` (`publish-site`), which runs [`.github/workflows/deploy-site.yml`](.github/workflows/deploy-site.yml) to fetch overrides, build Astro, and deploy to Cloudflare Pages with Wrangler.
+- **Environment variables**: see [`apps/admin/.env.example`](apps/admin/.env.example) for the admin app; GitHub Actions needs `AWS_DEPLOY_ROLE_ARN`, `CONTENT_TABLE_NAME`, and `CLOUDFLARE_API_TOKEN` (see [`infra/README.md`](infra/README.md)).
 
 ### PWA & Performance
 
@@ -126,7 +133,10 @@ This serves the built website from the `dist/` directory.
 - `src/layouts/` - Page layouts
 - `src/styles/` - Global styles
 - `public/` - Static assets
-- `src/i18n/` - Internationalization files
+- `src/i18n/` - Internationalization files (defaults; merged output in `src/i18n/generated/`)
+- `scripts/` - `merge:i18n` and `fetch:i18n` for build-time content overrides
+- `infra/` - AWS CDK stack (Cognito, API, DynamoDB)
+- `apps/admin/` - Vite/React admin UI for drafts and publish
 
 ## Technologies Used
 
@@ -137,6 +147,20 @@ This serves the built website from the `dist/` directory.
 ## License
 
 Apache-2.0
+
+---
+
+## Backend and admin quick reference
+
+| Item | Purpose |
+|------|---------|
+| `VITE_*` in `apps/admin` | Cognito pool id, client id, Region, API base URL for the admin SPA |
+| Secrets Manager (`GitHubSecretArn` from CDK) | JSON `githubToken` + `repository` for `repository_dispatch` after publish |
+| GitHub `AWS_DEPLOY_ROLE_ARN` | OIDC role so Actions can read DynamoDB published content |
+| GitHub `CONTENT_TABLE_NAME` | DynamoDB table name for `fetch:i18n` in deploy workflow |
+| GitHub `CLOUDFLARE_API_TOKEN` | Deploy static `dist/` to Cloudflare Pages |
+
+Deploy the admin app as a **second** Cloudflare Pages project (for example `admin.yourdomain.com`) pointing at `apps/admin` with build command `npm run build` and output directory `dist`.
 
 # Hosting Recommendations
 
