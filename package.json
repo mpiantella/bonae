@@ -3,13 +3,25 @@
   "version": "1.0.0",
   "description": "BONAE TECH Digital Services - static website",
   "scripts": {
+    "merge:i18n": "tsx scripts/merge-i18n.ts",
+    "fetch:i18n": "tsx scripts/fetch-published-overrides.ts",
+    "predev": "npm run merge:i18n",
     "dev": "astro dev",
+    "prebuild": "npm run merge:i18n",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "admin:dev": "npm --prefix apps/admin run dev",
+    "admin:build": "npm --prefix apps/admin run build"
   },
   "license": "Apache-2.0",
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-dynamodb": "^3.699.0",
+    "@aws-sdk/lib-dynamodb": "^3.699.0",
+    "tsx": "^4.19.2",
+    "wrangler": "^3.99.0"
   },
   "dependencies": {
     "@astrojs/tailwind": "^6.0.2",

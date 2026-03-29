@@ -1,0 +1,44 @@
+name: Deploy site (publish)
+
+on:
+  repository_dispatch:
+    types: [publish-site]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: sa-east-1
+
+      - run: npm ci
+
+      - name: Fetch published i18n overrides from DynamoDB
+        run: npm run fetch:i18n
+        env:
+          CONTENT_TABLE_NAME: ${{ secrets.CONTENT_TABLE_NAME }}
+
+      - run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        run: npx wrangler pages deploy dist --project-name bonae-tech
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

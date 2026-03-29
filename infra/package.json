@@ -1,0 +1,35 @@
+{
+  "name": "infra",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AWS CDK app for BONAE (Cognito, API, DynamoDB)",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "synth": "cdk synth",
+    "bootstrap": "node scripts/cdk-bootstrap.cjs",
+    "bootstrap:env": "dotenv -e .env -- node scripts/cdk-bootstrap.cjs",
+    "deploy": "cdk deploy",
+    "deploy:env": "dotenv -e .env -- cdk deploy"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.758.0",
+    "@aws-sdk/client-secrets-manager": "^3.758.0",
+    "@aws-sdk/lib-dynamodb": "^3.758.0",
+    "aws-jwt-verify": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.147",
+    "@types/node": "^22.10.0",
+    "aws-cdk": "^2.1114.0",
+    "aws-cdk-lib": "^2.245.0",
+    "constructs": "^10.6.0",
+    "dotenv-cli": "^8.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.9.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
