@@ -8,6 +8,9 @@ dist/
 i18n-overrides.json
 src/i18n/generated/*.merged.ts
 
+# AWS CDK (infra/)
+cdk.out/
+
 # Astro internals
 .astro/
 

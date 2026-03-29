@@ -6,14 +6,70 @@ Deploys a serverless API on API Gateway HTTP API + Lambda, Amazon Cognito (user 
 
 - AWS account and [CDK bootstrap](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html) in the target Region
 - Node.js 20+
+- Dependencies declared in [`package.json`](package.json) at the root of this folder (not the website `package.json` at the repo root)
 
-## Install and deploy
+## CDK bootstrap (fixes “SSM parameter …/cdk-bootstrap/hnb659fds/version not found”)
+
+CDK must be **[bootstrapped](https://docs.aws.amazon.com/cdk/v2/guide/bootstrapping.html) once per AWS account and Region**. Until then, deploy fails looking for the SSM parameter above.
+
+[`bin/bonae.ts`](bin/bonae.ts) defaults the stack Region to **`sa-east-1`** when `CDK_DEFAULT_REGION` is unset. Bootstrap **that** Region in the account you deploy to (or bootstrap whatever Region you set with `CDK_DEFAULT_REGION`).
+
+With the same credentials / profile you use for deploy:
 
 ```bash
 cd infra
 npm install
-npx cdk deploy
 ```
+
+**Easiest (uses `CDK_DEFAULT_REGION` or defaults to `sa-east-1`, account from `aws sts get-caller-identity`):**
+
+```bash
+npm run bootstrap
+```
+
+If you keep variables in **`infra/.env`** (see [`.env.example`](.env.example)), load them automatically:
+
+```bash
+npm run bootstrap:env
+```
+
+**Manual equivalent:**
+
+```bash
+npx cdk bootstrap aws://$(aws sts get-caller-identity --query Account --output text)/sa-east-1
+```
+
+If your Region is not `sa-east-1`, set `CDK_DEFAULT_REGION` (and use the same value here and in `cdk deploy`). Explicit account + Region:
+
+```bash
+export CDK_DEFAULT_ACCOUNT=123456789012
+export CDK_DEFAULT_REGION=sa-east-1
+npx cdk bootstrap aws://${CDK_DEFAULT_ACCOUNT}/${CDK_DEFAULT_REGION}
+```
+
+Then deploy:
+
+```bash
+npm run deploy
+# or: npm run deploy:env   # if using infra/.env
+```
+
+**Credentials:** If you use **IAM Identity Center (SSO)**, run `aws sso login --profile <name>` before CDK; use `export AWS_PROFILE=<name>`. Warnings about assuming roles are normal for SSO/chained profiles as long as `aws sts get-caller-identity` succeeds.
+
+## Install and deploy
+
+From the repository root:
+
+```bash
+cd infra
+npm install
+npm run bootstrap    # first time only per account + Region (see above)
+npm run deploy       # or: npm run deploy:env if you use infra/.env
+```
+
+`npm install` reads **`infra/package.json`** only. The Astro site at the repo root is a separate package.
+
+The CDK app lives in this folder: [`cdk.json`](cdk.json) (entry: `bin/bonae.ts`), [`lib/bonae-stack.ts`](lib/bonae-stack.ts), and [`lambda/api/handler.ts`](lambda/api/handler.ts).
 
 Note the stack outputs: `UserPoolId`, `UserPoolClientId`, `ApiUrl`, `ContentTableName`, `GitHubSecretArn`.
 
@@ -51,7 +107,7 @@ Users must set a new password on first sign-in (or use a permanent password via 
    - `CONTENT_TABLE_NAME` — same as stack output `ContentTableName`
    - `CLOUDFLARE_API_TOKEN` — Pages deploy token with `Account:Cloudflare Pages:Edit`
 
-4. Optional: `AWS_REGION` (repository variable) if not `us-east-1`.
+4. Optional: `AWS_REGION` (repository variable) if not `sa-east-1`.
 
 ### IAM role for GitHub Actions (OIDC)
 
@@ -89,7 +145,7 @@ Confirm the prompt. This removes the **CloudFormation stack** and deletes resour
 
 [`lib/bonae-stack.ts`](lib/bonae-stack.ts) sets **`RemovalPolicy.RETAIN`** on the **Cognito User Pool** and both **DynamoDB** tables so a stack delete does not wipe user or content data by accident. After `cdk destroy`, those resources **remain** in your account until you delete them manually.
 
-In the **AWS Console** (same Region, e.g. `us-east-1`):
+In the **AWS Console** (same Region, e.g. `sa-east-1`):
 
 | Resource | Where to delete |
 |----------|-----------------|

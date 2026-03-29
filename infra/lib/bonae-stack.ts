@@ -3,7 +3,6 @@ import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as apigwv2 from 'aws-cdk-lib/aws-apigatewayv2';
 import * as integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations';
-import * as authorizers from 'aws-cdk-lib/aws-apigatewayv2-authorizers';
 import * as lambda from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
 import { Construct } from 'constructs';
@@ -67,7 +66,8 @@ export class BonaeStack extends cdk.Stack {
     });
 
     const githubSecret = new secretsmanager.Secret(this, 'GitHubDispatchSecret', {
-      description: 'JSON: {"githubToken":"ghp_...","repository":"owner/repo"} for repository_dispatch',
+      description:
+        'JSON: {"githubToken":"ghp_...","repository":"owner/repo"} for repository_dispatch',
       secretStringValue: cdk.SecretValue.unsafePlainText(
         JSON.stringify({ githubToken: '', repository: '' }),
       ),
@@ -84,6 +84,8 @@ export class BonaeStack extends cdk.Stack {
         CONTENT_TABLE: contentTable.tableName,
         ADMIN_GROUP: ADMIN_GROUP_NAME,
         GITHUB_SECRET_ARN: githubSecret.secretArn,
+        USER_POOL_ID: this.userPool.userPoolId,
+        USER_POOL_CLIENT_ID: this.userPoolClient.userPoolClientId,
         AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       },
       bundling: {
@@ -97,23 +99,11 @@ export class BonaeStack extends cdk.Stack {
     contentTable.grantReadWriteData(apiFn);
     githubSecret.grantRead(apiFn);
 
-    const issuer = `https://cognito-idp.${this.region}.amazonaws.com/${this.userPool.userPoolId}`;
-
-    const jwtAuthorizer = new authorizers.HttpJwtAuthorizer('JwtAuthorizer', issuer, {
-      jwtAudience: [this.userPoolClient.userPoolClientId],
-      identitySource: ['$request.header.Authorization'],
-    });
-
     this.httpApi = new apigwv2.HttpApi(this, 'HttpApi', {
       apiName: 'bonae-api',
       corsPreflight: {
         allowHeaders: ['Authorization', 'Content-Type'],
-        allowMethods: [
-          apigwv2.CorsHttpMethod.GET,
-          apigwv2.CorsHttpMethod.PUT,
-          apigwv2.CorsHttpMethod.POST,
-          apigwv2.CorsHttpMethod.OPTIONS,
-        ],
+        allowMethods: [apigwv2.CorsHttpMethod.ANY],
         allowOrigins: ['*'],
         maxAge: cdk.Duration.hours(1),
       },
@@ -122,39 +112,18 @@ export class BonaeStack extends cdk.Stack {
     const integration = new integrations.HttpLambdaIntegration('ApiIntegration', apiFn);
 
     this.httpApi.addRoutes({
-      path: '/health',
-      methods: [apigwv2.HttpMethod.GET],
+      path: '/{proxy+}',
+      methods: [apigwv2.HttpMethod.ANY],
       integration,
-    });
-
-    this.httpApi.addRoutes({
-      path: '/me/profile',
-      methods: [apigwv2.HttpMethod.GET, apigwv2.HttpMethod.PUT],
-      integration,
-      authorizer: jwtAuthorizer,
-    });
-
-    this.httpApi.addRoutes({
-      path: '/admin/content/{locale}',
-      methods: [apigwv2.HttpMethod.GET, apigwv2.HttpMethod.PUT],
-      integration,
-      authorizer: jwtAuthorizer,
-    });
-
-    this.httpApi.addRoutes({
-      path: '/admin/publish',
-      methods: [apigwv2.HttpMethod.POST],
-      integration,
-      authorizer: jwtAuthorizer,
     });
 
     new cdk.CfnOutput(this, 'UserPoolId', { value: this.userPool.userPoolId });
-    new cdk.CfnOutput(this, 'UserPoolClientId', { value: this.userPoolClient.userPoolClientId });
-    new cdk.CfnOutput(this, 'CognitoIssuer', { value: issuer });
-    new cdk.CfnOutput(this, 'ApiUrl', { value: this.httpApi.apiEndpoint });
-    new cdk.CfnOutput(this, 'ProfilesTableName', { value: profilesTable.tableName });
+    new cdk.CfnOutput(this, 'UserPoolClientId', {
+      value: this.userPoolClient.userPoolClientId,
+    });
+    new cdk.CfnOutput(this, 'ApiUrl', { value: this.httpApi.url ?? '' });
     new cdk.CfnOutput(this, 'ContentTableName', { value: contentTable.tableName });
+    new cdk.CfnOutput(this, 'ProfilesTableName', { value: profilesTable.tableName });
     new cdk.CfnOutput(this, 'GitHubSecretArn', { value: githubSecret.secretArn });
-    new cdk.CfnOutput(this, 'AdminGroupName', { value: ADMIN_GROUP_NAME });
   }
 }
