@@ -29,7 +29,7 @@ export function getCurrentUser(): CognitoUser | null {
 
 export function signIn(email: string, password: string): Promise<CognitoUserSession> {
   return new Promise((resolve, reject) => {
-    const user = new CognitoUser({ Username: email, Pool: pool });
+    const user = new CognitoUser({ Username: email, Pool: getPool() });
     const authDetails = new AuthenticationDetails({
       Username: email,
       Password: password,
@@ -47,7 +47,7 @@ export function signOut(): void {
 }
 
 export function getSession(): Promise<CognitoUserSession | null> {
-  const user = pool.getCurrentUser();
+  const user = getPool().getCurrentUser();
   if (!user) return Promise.resolve(null);
   return new Promise((resolve, reject) => {
     user.getSession((err: Error | null, session: CognitoUserSession | null) => {
