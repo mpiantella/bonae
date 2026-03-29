@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "lib": ["es2022"],
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "typeRoots": ["./node_modules/@types"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "outDir": "dist"
+  },
+  "include": ["bin/**/*.ts", "lib/**/*.ts"],
+  "exclude": ["node_modules", "cdk.out", "lambda"]
+}

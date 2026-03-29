@@ -4,6 +4,9 @@ node_modules/
 # Build output
 dist/
 
+# AWS CDK (infra/)
+cdk.out/
+
 # Astro internals
 .astro/
 
