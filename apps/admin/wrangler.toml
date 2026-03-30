@@ -1,4 +1,5 @@
 # Cloudflare Pages when "Root directory" is `apps/admin`.
-# `dist` is relative to this folder only (not the monorepo root).
+# `name` must match your Pages project name in the Cloudflare dashboard (or rename the project to match).
+name = "bonae-admin"
 pages_build_output_dir = "dist"
 compatibility_date = "2026-03-07"
