@@ -115,7 +115,7 @@ Create an IAM role trusted by `token.actions.githubusercontent.com` with `sub` l
 
 ## Admin SPA
 
-The Vite app in `apps/admin` needs `VITE_*` variables (see `apps/admin/.env.example`). Build with `npm run build` and deploy the `dist/` folder to Cloudflare Pages (separate project, e.g. `admin` subdomain).
+The Vite app in `apps/admin` needs `VITE_*` variables (see `apps/admin/.env.example`). Create a **separate** Cloudflare Pages project (e.g. `admin` subdomain): root **`apps/admin`**, build **`npm ci && npm run build`**, output **`dist`**, set `VITE_*` in the project environment. **Leave the optional “Deploy command” blank** — `npx wrangler deploy` is for Workers only and will fail; Pages publishes `dist` after the build.
 
 ## CORS
 

@@ -162,7 +162,16 @@ Apache-2.0
 | GitHub `CONTENT_TABLE_NAME` | DynamoDB table name for `fetch:i18n` in deploy workflow |
 | GitHub `CLOUDFLARE_API_TOKEN` | Deploy static `dist/` to Cloudflare Pages |
 
-Deploy the admin app as a **second** Cloudflare Pages project (for example `admin.yourdomain.com`) pointing at `apps/admin` with build command `npm run build` and output directory `dist`.
+Deploy the admin app as a **second** Cloudflare Pages project (for example `admin.yourdomain.com`):
+
+| Setting | Value |
+|--------|--------|
+| Root directory | `apps/admin` |
+| Build command | `npm ci && npm run build` (or `npm run build` if dependencies are installed another way) |
+| Build output directory | `dist` |
+| **Deploy command** | **Leave empty** — Pages uploads `dist` after the build automatically. |
+
+Do **not** set the deploy command to `npx wrangler deploy`: that targets **Workers**, not static sites, and will fail with “Missing entry-point to Worker script”. The marketing site’s GitHub Action uses Wrangler to push to Pages; the admin Pages project does not need a deploy command unless you intentionally use `wrangler pages deploy` from CI (different command).
 
 # Hosting Recommendations
 
