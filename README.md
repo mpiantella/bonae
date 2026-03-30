@@ -106,7 +106,7 @@ npm run dev
 
 This will start the Astro development server, typically available at `http://localhost:4321`.
 
-The admin app is a separate Vite project. From the repo root run `npm run admin:dev` (or `cd apps/admin && npm run dev`); it is usually at `http://localhost:5173/`. Deploy it as its own Cloudflare Pages project (see project structure / infra docs).
+The admin app is a **standalone** Vite package under `apps/admin` (own `package.json` and `package-lock.json`). From that directory use `npm ci`, `npm run dev`, and `npm run build`. From the repo root you can run `npm run admin:dev`, `npm run admin:build`, or `npm run admin:preview` as shortcuts. See [`apps/admin/README.md`](apps/admin/README.md) and the Cloudflare table under [Backend and admin quick reference](#backend-and-admin-quick-reference).
 
 ### Building for Production
 
