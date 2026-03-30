@@ -6,6 +6,27 @@ import {
 } from 'amazon-cognito-identity-js';
 import { readAdminEnv } from './config';
 
+/** Admin-created users must set a password on first sign-in (NEW_PASSWORD_REQUIRED). */
+export type SignInResult =
+  | { kind: 'session'; session: CognitoUserSession }
+  | {
+      kind: 'newPasswordRequired';
+      user: CognitoUser;
+      /** Pass to `completeNewPassword` (after merging any required-attribute fields). */
+      userAttributes: Record<string, string>;
+      /** Attribute names Cognito still needs (show inputs and merge into `userAttributes`). */
+      requiredAttributes: string[];
+    };
+
+function stripNonWritableCognitoAttributes(
+  attrs: Record<string, string>,
+): Record<string, string> {
+  const out = { ...attrs };
+  delete out.email_verified;
+  delete out.phone_number_verified;
+  return out;
+}
+
 let pool: CognitoUserPool | null = null;
 
 function getPool(): CognitoUserPool {
@@ -27,7 +48,7 @@ export function getCurrentUser(): CognitoUser | null {
   return getPool().getCurrentUser();
 }
 
-export function signIn(email: string, password: string): Promise<CognitoUserSession> {
+export function signIn(email: string, password: string): Promise<SignInResult> {
   return new Promise((resolve, reject) => {
     const user = new CognitoUser({ Username: email, Pool: getPool() });
     const authDetails = new AuthenticationDetails({
@@ -35,6 +56,32 @@ export function signIn(email: string, password: string): Promise<CognitoUserSess
       Password: password,
     });
     user.authenticateUser(authDetails, {
+      onSuccess: (session) => resolve({ kind: 'session', session }),
+      onFailure: (err) => reject(err),
+      newPasswordRequired: (userAttributes, requiredAttributes) => {
+        const attrs = stripNonWritableCognitoAttributes(
+          userAttributes as Record<string, string>,
+        );
+        const required = Array.isArray(requiredAttributes) ? requiredAttributes : [];
+        resolve({
+          kind: 'newPasswordRequired',
+          user,
+          userAttributes: attrs,
+          requiredAttributes: required,
+        });
+      },
+    });
+  });
+}
+
+/** Finish first-time password setup after `signIn` returned `newPasswordRequired`. */
+export function completeNewPassword(
+  user: CognitoUser,
+  newPassword: string,
+  userAttributes: Record<string, string>,
+): Promise<CognitoUserSession> {
+  return new Promise((resolve, reject) => {
+    user.completeNewPasswordChallenge(newPassword, userAttributes, {
       onSuccess: (session) => resolve(session),
       onFailure: (err) => reject(err),
     });

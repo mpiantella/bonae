@@ -1,6 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { CognitoUserSession } from 'amazon-cognito-identity-js';
-import { getSession, signIn, signOut, getIdToken } from './auth';
+import {
+  getSession,
+  signIn,
+  signOut,
+  getIdToken,
+  completeNewPassword,
+  type SignInResult,
+} from './auth';
+import type { CognitoUser } from 'amazon-cognito-identity-js';
 import { apiFetch } from './api';
 
 type Locale = 'es' | 'en';
@@ -23,6 +31,14 @@ export default function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState<string | null>(null);
+
+  /** First sign-in: Cognito NEW_PASSWORD_REQUIRED challenge. */
+  const [nprUser, setNprUser] = useState<CognitoUser | null>(null);
+  const [nprBaseAttrs, setNprBaseAttrs] = useState<Record<string, string>>({});
+  const [nprRequiredNames, setNprRequiredNames] = useState<string[]>([]);
+  const [nprExtra, setNprExtra] = useState<Record<string, string>>({});
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
   const [locale, setLocale] = useState<Locale>('es');
   const [draft, setDraft] = useState<DraftShape>({});
@@ -62,13 +78,59 @@ export default function App() {
     if (session) void loadContent();
   }, [session, loadContent]);
 
+  function resetNprState() {
+    setNprUser(null);
+    setNprBaseAttrs({});
+    setNprRequiredNames([]);
+    setNprExtra({});
+    setNewPassword('');
+    setConfirmNewPassword('');
+  }
+
+  function applySignInResult(result: SignInResult) {
+    if (result.kind === 'session') {
+      setSession(result.session);
+      setPassword('');
+      resetNprState();
+      return;
+    }
+    setNprUser(result.user);
+    setNprBaseAttrs(result.userAttributes);
+    const needsInput = result.requiredAttributes.filter(
+      (name) => !String(result.userAttributes[name] ?? '').trim(),
+    );
+    setNprRequiredNames(needsInput);
+    const initial: Record<string, string> = {};
+    for (const name of needsInput) initial[name] = '';
+    setNprExtra(initial);
+    setPassword('');
+    setLoginError(null);
+  }
+
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setLoginError(null);
     try {
-      const s = await signIn(email.trim(), password);
-      setSession(s);
-      setPassword('');
+      const result = await signIn(email.trim(), password);
+      applySignInResult(result);
+    } catch (err: unknown) {
+      setLoginError(err instanceof Error ? err.message : String(err));
+    }
+  }
+
+  async function handleCompleteNewPassword(e: React.FormEvent) {
+    e.preventDefault();
+    if (!nprUser) return;
+    setLoginError(null);
+    if (newPassword !== confirmNewPassword) {
+      setLoginError('Las contraseñas no coinciden.');
+      return;
+    }
+    try {
+      const merged = { ...nprBaseAttrs, ...nprExtra };
+      const session = await completeNewPassword(nprUser, newPassword, merged);
+      setSession(session);
+      resetNprState();
     } catch (err: unknown) {
       setLoginError(err instanceof Error ? err.message : String(err));
     }
@@ -151,11 +213,69 @@ export default function App() {
   }
 
   if (!session) {
+    if (nprUser) {
+      return (
+        <div className="app">
+          <h1>BONAE — Admin</h1>
+          <p>Establece una nueva contraseña para continuar (cuenta recién creada).</p>
+          <form className="card" onSubmit={(e) => void handleCompleteNewPassword(e)}>
+            <label htmlFor="new-password">Nueva contraseña</label>
+            <input
+              id="new-password"
+              type="password"
+              autoComplete="new-password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+              minLength={8}
+            />
+            <label htmlFor="confirm-new-password">Confirmar contraseña</label>
+            <input
+              id="confirm-new-password"
+              type="password"
+              autoComplete="new-password"
+              value={confirmNewPassword}
+              onChange={(e) => setConfirmNewPassword(e.target.value)}
+              required
+              minLength={8}
+            />
+            {nprRequiredNames.map((name) => (
+              <div key={name}>
+                <label htmlFor={`npr-${name}`}>{name}</label>
+                <input
+                  id={`npr-${name}`}
+                  type="text"
+                  value={nprExtra[name] ?? ''}
+                  onChange={(e) =>
+                    setNprExtra((prev) => ({ ...prev, [name]: e.target.value }))
+                  }
+                  required
+                />
+              </div>
+            ))}
+            {loginError ? <p className="error">{loginError}</p> : null}
+            <div className="row" style={{ marginTop: '1rem' }}>
+              <button type="submit">Guardar e iniciar sesión</button>
+              <button
+                type="button"
+                onClick={() => {
+                  resetNprState();
+                  setLoginError(null);
+                }}
+              >
+                Volver
+              </button>
+            </div>
+          </form>
+        </div>
+      );
+    }
+
     return (
       <div className="app">
         <h1>BONAE — Admin</h1>
         <p>Inicia sesión con tu cuenta de Cognito.</p>
-        <form className="card" onSubmit={handleLogin}>
+        <form className="card" onSubmit={(e) => void handleLogin(e)}>
           <label htmlFor="email">Correo</label>
           <input
             id="email"
