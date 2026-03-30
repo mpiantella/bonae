@@ -1,0 +1,4 @@
+# Cloudflare Pages when "Root directory" is `apps/admin`.
+# `dist` is relative to this folder only (not the monorepo root).
+pages_build_output_dir = "dist"
+compatibility_date = "2026-03-07"

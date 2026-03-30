@@ -1,3 +1,7 @@
+# Marketing site (Astro). Production deploy uses explicit `dist` in GitHub Actions:
+#   wrangler pages deploy dist --project-name bonae-tech
+# Do not set `pages_build_output_dir` here: Cloudflare Pages reads this file for every
+# project in the monorepo; a path relative to the repo root breaks a second Pages project
+# whose root directory is `apps/admin` (Vite outputs to apps/admin/dist).
 name = "bonae-tech"
-pages_build_output_dir = "./dist"
 compatibility_date = "2026-03-07"

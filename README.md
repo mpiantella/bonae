@@ -171,6 +171,8 @@ Deploy the admin app as a **second** Cloudflare Pages project (for example `admi
 | Build output directory | `dist` |
 | **Deploy command** | **Leave empty** — Pages uploads `dist` after the build automatically. |
 
+The marketing site’s root [`wrangler.toml`](wrangler.toml) must **not** set `pages_build_output_dir` to `./dist`, or Pages will treat that path as outside an `apps/admin` project root. The admin app ships [`apps/admin/wrangler.toml`](apps/admin/wrangler.toml) with `pages_build_output_dir = "dist"`. If the **marketing** Pages project uses Git builds from the repo root, set **Build output directory** to `dist` in the dashboard (deploy via Actions already uses `wrangler pages deploy dist` explicitly).
+
 Do **not** set the deploy command to `npx wrangler deploy`: that targets **Workers**, not static sites, and will fail with “Missing entry-point to Worker script”. The marketing site’s GitHub Action uses Wrangler to push to Pages; the admin Pages project does not need a deploy command unless you intentionally use `wrangler pages deploy` from CI (different command).
 
 # Hosting Recommendations

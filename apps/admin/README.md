@@ -29,7 +29,7 @@ Use a **Pages** project with:
 
 - **Root directory:** `apps/admin` (or this folder if the repo is admin-only)
 - **Build command:** `npm ci && npm run build`
-- **Build output:** `dist`
+- **Build output:** `dist` (also declared in [`wrangler.toml`](wrangler.toml) so Cloudflare does not inherit the repo-root Wrangler config meant for the marketing site)
 - **Deploy command:** leave empty (do not run `vite` or `wrangler deploy` here)
 
 Set `VITE_*` environment variables in the Pages project for production builds.
