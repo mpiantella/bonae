@@ -1,5 +1,6 @@
-# Cloudflare Pages when "Root directory" is `apps/admin`.
-# `name` must match your Pages project name in the Cloudflare dashboard (or rename the project to match).
 name = "bonae-admin"
 pages_build_output_dir = "dist"
 compatibility_date = "2026-03-07"
+
+# Cloudflare Pages when the project's "Root directory" is `apps/admin`.
+# `name` must match the Pages project name in the dashboard exactly.

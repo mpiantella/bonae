@@ -29,7 +29,7 @@ Use a **Pages** project with:
 
 - **Root directory:** `apps/admin` (or this folder if the repo is admin-only)
 - **Build command:** `npm ci && npm run build`
-- **Build output:** `dist` (see [`wrangler.toml`](wrangler.toml): `pages_build_output_dir` and **`name`** must match your **Pages project name** in Cloudflare)
+- **Build output:** `dist` (see [`wrangler.toml`](wrangler.toml): `name` must match the **Pages project name** in Cloudflare exactly; change it here if your project is not named `bonae-admin`)
 - **Deploy command:** leave empty (do not run `vite` or `wrangler deploy` here)
 
 Set `VITE_*` environment variables in the Pages project for production builds.
