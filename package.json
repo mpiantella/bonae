@@ -9,9 +9,7 @@
     "dev": "astro dev",
     "prebuild": "npm run merge:i18n",
     "build": "astro build",
-    "preview": "astro preview",
-    "admin:dev": "npm --prefix apps/admin run dev",
-    "admin:build": "npm --prefix apps/admin run build"
+    "preview": "astro preview"
   },
   "license": "Apache-2.0",
   "engines": {
