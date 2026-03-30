@@ -10,4 +10,6 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+        working-directory: apps/static
       - run: npm run build
+        working-directory: apps/static

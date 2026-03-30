@@ -2,6 +2,8 @@
 
 Standalone Vite + React SPA for editing site content (Cognito sign-in, AWS HTTP API). It does **not** depend on the monorepo root `package.json` or Astro toolchain.
 
+For **git-based** editing (Decap CMS on the marketing site, no AWS), see the repo root `README.md` section **Decap CMS** and `/decap/` under `apps/static/public/decap/`.
+
 ## Prerequisites
 
 - Node.js 20+

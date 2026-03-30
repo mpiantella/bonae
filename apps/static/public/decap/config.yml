@@ -1,0 +1,61 @@
+# Decap CMS — Git-backed overrides for apps/static (replace placeholders before use).
+# OAuth: deploy workers/decap-github-oauth and set base_url to that Worker URL.
+# GitHub OAuth App callback URL: https://<worker-host>/callback?provider=github
+
+backend:
+  name: github
+  repo: YOUR_GITHUB_ORG/YOUR_REPO_NAME
+  branch: main
+  base_url: https://YOUR_DECAP_OAUTH_WORKER.workers.dev
+  auth_endpoint: auth
+
+media_folder: apps/static/public/images/uploads
+public_folder: /images/uploads
+media_library:
+  max_file_size: 5120000
+
+collections:
+  - name: site_i18n
+    label: Site copy
+    files:
+      - label: i18n overrides (ES + EN)
+        name: i18n-overrides
+        file: apps/static/i18n-overrides.json
+        fields:
+          - label: Spanish
+            name: es
+            widget: object
+            collapsed: true
+            fields: &locale_fields
+              - label: Hero
+                name: hero
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: Badge, name: badge, widget: string }
+                  - { label: Headline, name: headline, widget: string }
+                  - { label: Subheadline, name: subheadline, widget: text }
+                  - { label: Primary CTA, name: cta, widget: string }
+                  - { label: Secondary CTA, name: ctaSecondary, widget: string }
+                  - { label: CTA note, name: ctaSub, widget: string }
+              - label: Contact
+                name: contact
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: Section badge, name: sectionBadge, widget: string }
+                  - { label: Title, name: title, widget: string }
+                  - { label: Subtitle, name: subtitle, widget: text }
+                  - { label: Email (display), name: email, widget: string }
+                  - { label: Phone, name: phone, widget: string }
+                  - { label: WhatsApp label, name: whatsappText, widget: string }
+                  - { label: WhatsApp default message, name: whatsappMessage, widget: text }
+                  - { label: Email label, name: emailText, widget: string }
+                  - { label: Hours, name: hours, widget: string }
+                  - { label: Location, name: location, widget: string }
+                  - { label: Location note, name: locationNote, widget: text }
+          - label: English
+            name: en
+            widget: object
+            collapsed: true
+            fields: *locale_fields

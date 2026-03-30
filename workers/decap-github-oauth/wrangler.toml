@@ -1,0 +1,12 @@
+# Cloudflare Worker: GitHub OAuth proxy for Decap CMS (Git backend).
+# https://decapcms.org/docs/authentication-backends/
+name = "decap-github-oauth"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+
+# Set secrets after first deploy (do not commit real values):
+#   npx wrangler secret put GITHUB_OAUTH_ID
+#   npx wrangler secret put GITHUB_OAUTH_SECRET
+#
+# Optional: private GitHub repo → use repo scope
+#   npx wrangler secret put GITHUB_REPO_PRIVATE   # value: 1

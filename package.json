@@ -1,15 +1,14 @@
 {
-  "name": "bonae tech-website",
+  "name": "bonae",
+  "private": true,
   "version": "1.0.0",
-  "description": "BONAE TECH Digital Services - static website",
+  "description": "BONAE TECH monorepo (marketing site, admin, infra)",
   "scripts": {
-    "merge:i18n": "tsx scripts/merge-i18n.ts",
-    "fetch:i18n": "tsx scripts/fetch-published-overrides.ts",
-    "predev": "npm run merge:i18n",
-    "dev": "astro dev",
-    "prebuild": "npm run merge:i18n",
-    "build": "astro build",
-    "preview": "astro preview",
+    "merge:i18n": "npm --prefix apps/static run merge:i18n",
+    "fetch:i18n": "npm --prefix apps/static run fetch:i18n",
+    "dev": "npm --prefix apps/static run dev",
+    "build": "npm --prefix apps/static run build",
+    "preview": "npm --prefix apps/static run preview",
     "admin:dev": "npm --prefix apps/admin run dev",
     "admin:build": "npm --prefix apps/admin run build",
     "admin:preview": "npm --prefix apps/admin run preview"
@@ -17,17 +16,5 @@
   "license": "Apache-2.0",
   "engines": {
     "node": ">=20"
-  },
-  "devDependencies": {
-    "@aws-sdk/client-dynamodb": "^3.699.0",
-    "@aws-sdk/lib-dynamodb": "^3.699.0",
-    "tsx": "^4.19.2",
-    "wrangler": "^3.99.0"
-  },
-  "dependencies": {
-    "@astrojs/tailwind": "^6.0.2",
-    "@fontsource-variable/inter": "^5.2.8",
-    "astro": "^4.16.19",
-    "tailwindcss": "^3.4.19"
   }
 }

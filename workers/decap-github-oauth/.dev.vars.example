@@ -1,0 +1,5 @@
+# Copy to .dev.vars for `wrangler dev` (never commit .dev.vars).
+GITHUB_OAUTH_ID=
+GITHUB_OAUTH_SECRET=
+# Optional: set to 1 if Decap edits a private repository
+# GITHUB_REPO_PRIVATE=0

@@ -109,6 +109,8 @@ Users must set a new password on first sign-in (or use a permanent password via 
 
 4. Optional: `AWS_REGION` (repository variable) if not `sa-east-1`.
 
+5. **Git-only overrides (Decap CMS):** If production copy comes only from committed `apps/static/i18n-overrides.json` and you do **not** want CI to pull DynamoDB, set repository variable `SKIP_FETCH_I18N` to `true` (see repo root `README.md`). Otherwise leave it unset so `deploy-site` runs `fetch:i18n` after publish from the AWS admin.
+
 ### IAM role for GitHub Actions (OIDC)
 
 Create an IAM role trusted by `token.actions.githubusercontent.com` with `sub` like `repo:OWNER/REPO:ref:refs/heads/main` and attach a policy allowing `dynamodb:GetItem` (and `BatchGetItem` if you prefer) on the **SiteContent** table ARN.

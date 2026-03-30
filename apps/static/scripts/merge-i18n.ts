@@ -1,6 +1,10 @@
 /**
- * Merges default translations with optional overrides (from DynamoDB publish or local file)
- * and writes src/i18n/generated/*.merged.ts for Astro build.
+ * Merges default translations with optional overrides and writes src/i18n/generated/*.merged.ts for Astro build.
+ *
+ * **Sources of overrides (choose one per deployment; do not mix without a policy):**
+ * - **Git / Decap:** Committed [`i18n-overrides.json`](../i18n-overrides.json) deep-merged last (after defaults).
+ * - **DynamoDB (AWS admin):** CI may run `fetch:i18n` before merge, which overwrites that JSON in the workspace only — see `.github/workflows/deploy-site.yml` and repo variable `SKIP_FETCH_I18N`.
+ * - **Local:** Same file, or `I18N_OVERRIDES_JSON` / `I18N_OVERRIDES_PATH`.
  */
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
