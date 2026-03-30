@@ -128,7 +128,12 @@ export default function App() {
     }
     try {
       const merged = { ...nprBaseAttrs, ...nprExtra };
-      const session = await completeNewPassword(nprUser, newPassword, merged);
+      const session = await completeNewPassword(
+        nprUser,
+        newPassword,
+        merged,
+        nprRequiredNames,
+      );
       setSession(session);
       resetNprState();
     } catch (err: unknown) {

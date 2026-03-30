@@ -27,6 +27,28 @@ function stripNonWritableCognitoAttributes(
   return out;
 }
 
+/**
+ * Cognito rejects `RespondToAuthChallenge` if you echo immutable attributes that are
+ * already set (e.g. "Cannot modify an already provided email"). Only include `email` /
+ * `phone_number` when the NEW_PASSWORD_REQUIRED challenge still required them (user
+ * collected in the UI).
+ */
+function attributesForNewPasswordChallenge(
+  attrs: Record<string, string>,
+  requiredNamesFromUi: string[],
+): Record<string, string> {
+  const out = { ...attrs };
+  delete out.email_verified;
+  delete out.phone_number_verified;
+  if (!requiredNamesFromUi.includes('email')) {
+    delete out.email;
+  }
+  if (!requiredNamesFromUi.includes('phone_number')) {
+    delete out.phone_number;
+  }
+  return out;
+}
+
 let pool: CognitoUserPool | null = null;
 
 function getPool(): CognitoUserPool {
@@ -74,14 +96,21 @@ export function signIn(email: string, password: string): Promise<SignInResult> {
   });
 }
 
-/** Finish first-time password setup after `signIn` returned `newPasswordRequired`. */
+/**
+ * Finish first-time password setup after `signIn` returned `newPasswordRequired`.
+ * @param requiredNamesFromUi — `requiredAttributes` that were still empty and collected
+ *   in the form (e.g. `nprRequiredNames` in App). Used to avoid sending `email` / `phone_number`
+ *   when Cognito already set them.
+ */
 export function completeNewPassword(
   user: CognitoUser,
   newPassword: string,
   userAttributes: Record<string, string>,
+  requiredNamesFromUi: string[],
 ): Promise<CognitoUserSession> {
+  const payload = attributesForNewPasswordChallenge(userAttributes, requiredNamesFromUi);
   return new Promise((resolve, reject) => {
-    user.completeNewPasswordChallenge(newPassword, userAttributes, {
+    user.completeNewPasswordChallenge(newPassword, payload, {
       onSuccess: (session) => resolve(session),
       onFailure: (err) => reject(err),
     });
