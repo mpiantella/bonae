@@ -171,7 +171,9 @@ Deploy the admin app as a **second** Cloudflare Pages project (for example `admi
 | Build output directory | `dist` |
 | **Deploy command** | **Leave empty** — Pages uploads `dist` after the build automatically. |
 
-Do **not** keep a **repo-root** `wrangler.toml` when you have two Pages projects on one repo: Cloudflare reads that file for **every** build, so a single `name` / `pages_build_output_dir` will break one of the apps. The marketing site should use **dashboard** build settings (output **`dist`**) and/or [`wrangler pages deploy dist --project-name bonae-tech`](.github/workflows/deploy-site.yml) in Actions. The admin app uses only [`apps/admin/wrangler.toml`](apps/admin/wrangler.toml).
+**Wrangler / `wrangler.toml`:** Do **not** add a repo-root or `apps/admin` `wrangler.toml` for these static sites unless you need Pages Functions bindings. Cloudflare’s build runs a Wrangler config step that can pick up the wrong file in a monorepo or fail with “Missing … `name`” on older commits. Configure **build output** (`dist`) and env vars **only in the Pages dashboard** for both projects. The marketing deploy in GitHub Actions uses [`wrangler pages deploy dist --project-name bonae-tech`](.github/workflows/deploy-site.yml) and does not rely on a committed Wrangler file.
+
+**If builds still fail,** check the log line that shows `HEAD is now at <commit>` — it must match the commit on GitHub that contains your latest changes (push `main` / your production branch and redeploy).
 
 Do **not** set the deploy command to `npx wrangler deploy`: that targets **Workers**, not static sites, and will fail with “Missing entry-point to Worker script”. The marketing site’s GitHub Action uses Wrangler to push to Pages; the admin Pages project does not need a deploy command unless you intentionally use `wrangler pages deploy` from CI (different command).
 
