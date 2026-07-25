@@ -86,9 +86,9 @@ const templateItemSchema = z
     description: z.string().min(1).max(220),
     detailDescription: z.string(),
     imageSrc: z.string(),
-    mobileImageSrc: z.string(),
     slug: z.string(),
     demoUrl: z.string(),
+    price: z.number().int().nonnegative(),
     features: z.array(z.string().min(1)).max(8),
     comingSoon: z.boolean(),
   })
@@ -122,6 +122,21 @@ const templateItemSchema = z
         code: z.ZodIssueCode.custom,
         message: 'Detail description is required for live templates',
         path: ['detailDescription'],
+      });
+    }
+    if (item.price <= 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Price is required for live templates',
+        path: ['price'],
+      });
+    }
+    const demoUrl = item.demoUrl.trim();
+    if (demoUrl && !/^https?:\/\/.+/i.test(demoUrl)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Live page URL must be an absolute http(s) URL',
+        path: ['demoUrl'],
       });
     }
   });
@@ -190,8 +205,9 @@ export const contentDocumentSchema = z.object({
     viewAllHref: z.string().min(1),
     viewDetailsLabel: z.string().min(1),
     backLabel: z.string().min(1),
-    desktopTabLabel: z.string().min(1),
-    mobileTabLabel: z.string().min(1),
+    featuresLabel: z.string().min(1),
+    priceCurrency: z.string().min(1),
+    priceNote: z.string().min(1),
     useTemplateLabel: z.string().min(1),
     demoLabel: z.string().min(1),
     comingSoonModalBody: z.string().min(1),

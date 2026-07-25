@@ -29,6 +29,9 @@ const whatsappHref = whatsappHrefFor(t);
 const templateWhatsappHref = whatsappHrefForTemplate(t, item.title);
 const pageTitle = `${item.title} — ${t.siteName}`;
 const pageDescription = item.detailDescription || item.description;
+// #region agent log
+fetch('http://127.0.0.1:7408/ingest/381749ce-c555-402d-bc1a-0721d05633f8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'c03b01'},body:JSON.stringify({sessionId:'c03b01',runId:'post-fix',hypothesisId:'B',location:'plantillas/[slug].astro:item',message:'Loaded template item for detail page',data:{slug:slug??'',found:Boolean(item),demoUrl:item.demoUrl,comingSoon:item.comingSoon},timestamp:Date.now()})}).catch(()=>{});
+// #endregion
 ---
 
 <Layout

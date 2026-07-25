@@ -22,9 +22,9 @@ const defaultItem = (): TemplatesFormValues['items'][number] => ({
   description: '',
   detailDescription: '',
   imageSrc: '',
-  mobileImageSrc: '',
   slug: '',
   demoUrl: '',
+  price: 0,
   features: [],
   comingSoon: false,
 });
@@ -42,7 +42,16 @@ export function TemplatesSectionForm({ doc, onEdit, errors }: Props) {
   const [expandedCards, setExpandedCards] = useState<Record<string, boolean>>({});
 
   useFormEditSync(watch, (formValues) => {
-    onEdit?.({ ...docRef.current, templates: formValues });
+    onEdit?.({
+      ...docRef.current,
+      templates: {
+        ...formValues,
+        items: formValues.items.map((item) => ({
+          ...item,
+          price: Number(item.price) || 0,
+        })),
+      },
+    });
   });
 
   return (
@@ -88,16 +97,19 @@ export function TemplatesSectionForm({ doc, onEdit, errors }: Props) {
           <FieldCard label="Volver" error={getLocaleFieldError(errors, 'templates', 'backLabel')}>
             <input className="editor-input" {...register('backLabel')} />
           </FieldCard>
-          <FieldCard label="Pestaña escritorio" error={getLocaleFieldError(errors, 'templates', 'desktopTabLabel')}>
-            <input className="editor-input" {...register('desktopTabLabel')} />
+          <FieldCard label="Detalles técnicos" error={getLocaleFieldError(errors, 'templates', 'featuresLabel')}>
+            <input className="editor-input" {...register('featuresLabel')} />
           </FieldCard>
-          <FieldCard label="Pestaña móvil" error={getLocaleFieldError(errors, 'templates', 'mobileTabLabel')}>
-            <input className="editor-input" {...register('mobileTabLabel')} />
+          <FieldCard label="Moneda" error={getLocaleFieldError(errors, 'templates', 'priceCurrency')}>
+            <input className="editor-input" {...register('priceCurrency')} placeholder="USD" />
+          </FieldCard>
+          <FieldCard label="Nota de precio" error={getLocaleFieldError(errors, 'templates', 'priceNote')}>
+            <input className="editor-input" {...register('priceNote')} placeholder="pago único" />
           </FieldCard>
           <FieldCard label="Usar plantilla" error={getLocaleFieldError(errors, 'templates', 'useTemplateLabel')}>
             <input className="editor-input" {...register('useTemplateLabel')} />
           </FieldCard>
-          <FieldCard label="Ver demo" error={getLocaleFieldError(errors, 'templates', 'demoLabel')}>
+          <FieldCard label="Ver página en vivo" error={getLocaleFieldError(errors, 'templates', 'demoLabel')}>
             <input className="editor-input" {...register('demoLabel')} />
           </FieldCard>
           <FieldCard label="Modal próximamente" error={getLocaleFieldError(errors, 'templates', 'comingSoonModalBody')}>
@@ -177,6 +189,17 @@ export function TemplatesSectionForm({ doc, onEdit, errors }: Props) {
               Próximamente (sin página de detalle)
             </label>
 
+            <FieldCard
+              label="URL página en vivo"
+              error={getLocaleFieldError(errors, 'templates', 'items', index, 'demoUrl')}
+            >
+              <input
+                className="editor-input"
+                placeholder="https://ejemplo.pages.dev"
+                {...register(`items.${index}.demoUrl` as const)}
+              />
+            </FieldCard>
+
             <button
               type="button"
               className="text-xs font-semibold text-editor-muted underline"
@@ -189,7 +212,7 @@ export function TemplatesSectionForm({ doc, onEdit, errors }: Props) {
               <div className="space-y-2 border-t border-editor-track pt-2">
                 <input
                   className="editor-input"
-                  placeholder="Slug (modelo-empresarial)"
+                  placeholder="Slug (modelo-2)"
                   {...register(`items.${index}.slug` as const)}
                 />
                 {getLocaleFieldError(errors, 'templates', 'items', index, 'slug') && (
@@ -202,23 +225,21 @@ export function TemplatesSectionForm({ doc, onEdit, errors }: Props) {
                 />
                 <input
                   className="editor-input"
-                  placeholder="Imagen escritorio (/images/templates/...)"
+                  placeholder="Imagen (/images/templates/...)"
                   {...register(`items.${index}.imageSrc` as const)}
                 />
                 <input
                   className="editor-input"
-                  placeholder="Imagen móvil (opcional)"
-                  {...register(`items.${index}.mobileImageSrc` as const)}
-                />
-                <input
-                  className="editor-input"
-                  placeholder="URL demo en vivo (opcional)"
-                  {...register(`items.${index}.demoUrl` as const)}
+                  type="number"
+                  min={0}
+                  step={1}
+                  placeholder="Precio"
+                  {...register(`items.${index}.price` as const, { valueAsNumber: true })}
                 />
 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="editor-label">Características</span>
+                    <span className="editor-label">Detalles técnicos</span>
                     <button
                       type="button"
                       className="btn-editor-mini"

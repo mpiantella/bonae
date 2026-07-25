@@ -87,10 +87,11 @@ const TEMPLATES_FIELDS: Record<string, string> = {
   viewAllHref: 'Enlace Ver todas',
   viewDetailsLabel: 'Ver detalles',
   backLabel: 'Volver',
-  desktopTabLabel: 'Pestaña escritorio',
-  mobileTabLabel: 'Pestaña móvil',
+  featuresLabel: 'Detalles técnicos',
+  priceCurrency: 'Moneda',
+  priceNote: 'Nota de precio',
   useTemplateLabel: 'Usar plantilla',
-  demoLabel: 'Ver demo',
+  demoLabel: 'Ver página en vivo',
   comingSoonModalBody: 'Modal próximamente',
   comingSoonModalDismiss: 'Cerrar modal',
 };
@@ -100,10 +101,9 @@ const TEMPLATES_ITEM_FIELDS: Record<string, string> = {
   title: 'Título',
   description: 'Descripción',
   detailDescription: 'Descripción larga',
-  imageSrc: 'Imagen escritorio',
-  mobileImageSrc: 'Imagen móvil',
+  imageSrc: 'Imagen',
   slug: 'Slug',
-  demoUrl: 'URL demo',
+  demoUrl: 'URL página en vivo',
 };
 
 const PLANS_FIELDS: Record<string, string> = {
@@ -237,6 +237,14 @@ function diffTemplatesItems(
           after: truncate(value),
         });
       }
+      if (draftItem.price > 0) {
+        changes.push({
+          locale,
+          label: formatChangeLabel(locale, SECTION_TITLES.templates, `Ítem ${i + 1}`, 'Precio'),
+          kind: 'added',
+          after: String(draftItem.price),
+        });
+      }
       if (draftItem.comingSoon) {
         changes.push({
           locale,
@@ -262,6 +270,15 @@ function diffTemplatesItems(
         after,
       );
     }
+    if (draftItem.price !== publishedItem.price) {
+      changes.push({
+        locale,
+        label: formatChangeLabel(locale, SECTION_TITLES.templates, `Ítem ${i + 1}`, 'Precio'),
+        kind: 'changed',
+        before: String(publishedItem.price),
+        after: String(draftItem.price),
+      });
+    }
     if (draftItem.comingSoon !== publishedItem.comingSoon) {
       changes.push({
         locale,
@@ -277,7 +294,7 @@ function diffTemplatesItems(
     pushStringChange(
       changes,
       locale,
-      formatChangeLabel(locale, SECTION_TITLES.templates, `Ítem ${i + 1}`, 'Características'),
+      formatChangeLabel(locale, SECTION_TITLES.templates, `Ítem ${i + 1}`, 'Detalles técnicos'),
       publishedFeatures,
       draftFeatures,
     );

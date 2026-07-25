@@ -12,6 +12,8 @@ type TemplateItemErrors = Array<{
   description?: string | null;
   slug?: string | null;
   detailDescription?: string | null;
+  demoUrl?: string | null;
+  price?: string | null;
 }>;
 type FounderErrors = Array<{ name?: string | null; role?: string | null }>;
 
@@ -36,8 +38,9 @@ export interface LocaleSectionErrors {
     viewAllHref?: string | null;
     viewDetailsLabel?: string | null;
     backLabel?: string | null;
-    desktopTabLabel?: string | null;
-    mobileTabLabel?: string | null;
+    featuresLabel?: string | null;
+    priceCurrency?: string | null;
+    priceNote?: string | null;
     useTemplateLabel?: string | null;
     demoLabel?: string | null;
     comingSoonModalBody?: string | null;
@@ -154,10 +157,11 @@ function buildLocaleErrors(doc: ContentDocument | null): LocaleSectionErrors {
       viewAllHref: checkField(doc.templates.viewAllHref, { required: true }, 'Enlace Ver todas'),
       viewDetailsLabel: checkField(doc.templates.viewDetailsLabel, { required: true }, 'Ver detalles'),
       backLabel: checkField(doc.templates.backLabel, { required: true }, 'Volver'),
-      desktopTabLabel: checkField(doc.templates.desktopTabLabel, { required: true }, 'Pestaña escritorio'),
-      mobileTabLabel: checkField(doc.templates.mobileTabLabel, { required: true }, 'Pestaña móvil'),
+      featuresLabel: checkField(doc.templates.featuresLabel, { required: true }, 'Detalles técnicos'),
+      priceCurrency: checkField(doc.templates.priceCurrency, { required: true, max: 12 }, 'Moneda'),
+      priceNote: checkField(doc.templates.priceNote, { required: true, max: 40 }, 'Nota de precio'),
       useTemplateLabel: checkField(doc.templates.useTemplateLabel, { required: true }, 'Usar plantilla'),
-      demoLabel: checkField(doc.templates.demoLabel, { required: true }, 'Ver demo'),
+      demoLabel: checkField(doc.templates.demoLabel, { required: true }, 'Ver página en vivo'),
       comingSoonModalBody: checkField(
         doc.templates.comingSoonModalBody,
         { required: true, max: 280 },
@@ -178,6 +182,11 @@ function buildLocaleErrors(doc: ContentDocument | null): LocaleSectionErrors {
         detailDescription: item.comingSoon
           ? null
           : checkField(item.detailDescription, { required: true, max: 500 }, 'Descripción larga'),
+        demoUrl:
+          !item.demoUrl.trim() || /^https?:\/\/.+/i.test(item.demoUrl.trim())
+            ? null
+            : 'URL página en vivo debe ser http(s)',
+        price: item.comingSoon || item.price > 0 ? null : 'Precio es obligatorio',
       })),
     },
     plans: {
@@ -285,7 +294,14 @@ export function getLocaleFieldError(
     if (field === 'items' && index !== undefined && subField) {
       return (
         errors.templates.items[index]?.[
-          subField as 'category' | 'title' | 'description' | 'slug' | 'detailDescription'
+          subField as
+            | 'category'
+            | 'title'
+            | 'description'
+            | 'slug'
+            | 'detailDescription'
+            | 'demoUrl'
+            | 'price'
         ] ?? null
       );
     }
