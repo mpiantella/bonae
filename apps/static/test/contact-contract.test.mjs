@@ -32,7 +32,7 @@ test('contact form posts the simplified lead payload to the contact endpoint', a
 
   assert.doesNotMatch(source, /contact\.form\.(?:business|serviceType|serviceOptions)/);
   assert.doesNotMatch(source, /name="(?:business|service)"/);
-}
+});
 
 test('contact social links are rendered only when configured URLs exist', async () => {
   const source = await readStaticFile('src/components/Contact.astro');
