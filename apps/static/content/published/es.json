@@ -151,9 +151,9 @@
       },
       {
         "category": "Paneles de Administración y Negocios",
-        "title": "Modelo 3 - Plantilla de Panel Administrativo y de Ventas",
+        "title": "Plantilla de Panel Administrativo y de Ventas",
         "description": "Un panel administrativo moderno y responsivo diseñado para el seguimiento de contratos, pagos, rendimiento de vendedores y saldos pendientes.",
-        "detailDescription": "Modelo 3 es una plantilla de panel de gestión intuitiva adaptada para empresas que gestionan ventas, contratos y seguimiento de pagos a través de múltiples canales. Incluye métricas de resumen en tiempo real para contratos activos, pendientes y cancelados, resúmenes financieros claros de deudas, desglose por métodos de pago (Zelle, PayPal, Binance, Efectivo, etc.) y reportes descargables agrupados por vendedor.",
+        "detailDescription": "Esta plantilla de panel de gestión intuitiva adaptada para empresas que gestionan ventas, contratos y seguimiento de pagos a través de múltiples canales. Incluye métricas de resumen en tiempo real para contratos activos, pendientes y cancelados, resúmenes financieros claros de deudas, desglose por métodos de pago (Zelle, PayPal, Binance, Efectivo, etc.) y reportes descargables agrupados por vendedor.",
         "features": [
           "Seguimiento en tiempo real del estado de contratos (Activos, Por despachar, Cancelados, Finalizados)",
           "Resumen financiero completo (Deuda Total, Deuda Vencida, Saldo Pendiente, Total Pagado)",
