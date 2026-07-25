@@ -69,7 +69,7 @@
     "years": "30+",
     "yearsLabel": "Años de experiencia combinada",
     "clients": "Clientes",
-    "clientsValue": "—",
+    "clientsValue": "30",
     "projects": "Proyectos completados",
     "projectsValue": "—",
     "presence": "Países",
@@ -136,6 +136,10 @@
         "title": "Plantilla Modelo Empresarial",
         "description": "Un sitio web liviano y novedoso diseñado para ayudar a empresas a llegar a más clientes de forma efectiva.",
         "detailDescription": "Esta plantilla ofrece un diseño elegante y profesional que incluye un carrusel principal de imágenes, tarjetas para destacar servicios, contadores de métricas clave, logotipos de clientes y secciones de llamada a la acción enfocadas en la conversión.",
+        "imageSrc": "/images/templates/modelo-2.png",
+        "slug": "modelo-2",
+        "demoUrl": "https://modelo-2.bonaetech.com/",
+        "price": 100,
         "features": [
           "Diseño adaptable, liviano y moderno",
           "Sección principal con carrusel e interactividad",
@@ -143,10 +147,6 @@
           "Sección de indicadores y métricas de impacto",
           "Estructura multilingüe e integración de contacto rápido"
         ],
-        "imageSrc": "/images/templates/modelo-2.png",
-        "slug": "modelo-2",
-        "demoUrl": "https://modelo-2.bonaetech.com/",
-        "price": 100,
         "comingSoon": false
       },
       {
@@ -154,6 +154,10 @@
         "title": "Plantilla de Panel Administrativo y de Ventas",
         "description": "Un panel administrativo moderno y responsivo diseñado para el seguimiento de contratos, pagos, rendimiento de vendedores y saldos pendientes.",
         "detailDescription": "Esta plantilla de panel de gestión intuitiva adaptada para empresas que gestionan ventas, contratos y seguimiento de pagos a través de múltiples canales. Incluye métricas de resumen en tiempo real para contratos activos, pendientes y cancelados, resúmenes financieros claros de deudas, desglose por métodos de pago (Zelle, PayPal, Binance, Efectivo, etc.) y reportes descargables agrupados por vendedor.",
+        "imageSrc": "/images/templates/modelo-3.png",
+        "slug": "modelo-3",
+        "demoUrl": "https://modelo-3.bonaetech.com/",
+        "price": 300,
         "features": [
           "Seguimiento en tiempo real del estado de contratos (Activos, Por despachar, Cancelados, Finalizados)",
           "Resumen financiero completo (Deuda Total, Deuda Vencida, Saldo Pendiente, Total Pagado)",
@@ -161,10 +165,6 @@
           "Reportes descargables de ventas y deudas agrupados por vendedor",
           "Diseño responsivo y optimizado para dispositivos móviles con navegación por pestañas"
         ],
-        "imageSrc": "/images/templates/modelo-3.png",
-        "slug": "modelo-3",
-        "demoUrl": "https://modelo-3.bonaetech.com/",
-        "price": 300,
         "comingSoon": false
       },
       {
@@ -172,6 +172,10 @@
         "title": "Plantilla de Tienda de Moda y Belleza Femenina",
         "description": "Una plantilla web elegante y moderna para comercio electrónico, diseñada para tiendas de moda, accesorios y productos de belleza femenina.",
         "detailDescription": "Una plantilla de tienda en línea completa con una estética refinada, ideal para marcas de moda y belleza. Incluye categorías estructuradas (vestidos, blusas, faldas, abrigos, joyería, maquillaje, cuidado de la piel y fragancias), catálogo destacado, sección de testimonios de clientes, banners promocionales con contador regresivo y navegación integrada.",
+        "imageSrc": "/images/templates/modelo-4.png",
+        "slug": "modelo-4",
+        "demoUrl": "https://modelo-4.bonaetech.com/",
+        "price": 150,
         "features": [
           "Diseño limpio y moderno optimizado para productos de moda y cuidado personal",
           "Navegación completa por categorías que abarca prendas, accesorios y cosméticos",
@@ -179,10 +183,6 @@
           "Banner de ofertas semanales con temporizador de cuenta regresiva",
           "Sección integrada de opiniones de clientes y enlaces a redes sociales"
         ],
-        "imageSrc": "/images/templates/modelo-4.png",
-        "slug": "modelo-4",
-        "demoUrl": "https://modelo-4.bonaetech.com/",
-        "price": 150,
         "comingSoon": false
       },
       {
@@ -190,6 +190,10 @@
         "title": "Equipo Ecuestre y Ropa de Montar",
         "description": "Una plantilla de comercio electrónico refinada y moderna, diseñada específicamente para equipo ecuestre, ropa de equitación y accesorios de caballeriza.",
         "detailDescription": "model-5 es una plantilla sólida y elegante pensada para marcas ecuestres, tiendas de guarnicionería y boutiques de equitación. Con una tipografía limpia, catálogos destacados, banners promocionales con contador de tiempo regresivo, formulario de contacto directo y cabecera con soporte para cambio de idioma, este diseño ofrece una experiencia de compra completa y profesional para amantes de los caballos.",
+        "imageSrc": "/images/templates/modelo-5.png",
+        "slug": "modelo-5",
+        "demoUrl": "https://modelo-5.bonaetech.com/",
+        "price": 150,
         "features": [
           "Catálogo de productos organizado por sillas, botas, ropa, cascos y accesorios de cuidado",
           "Sección de ofertas promocionales con temporizador de cuenta regresiva",
@@ -197,10 +201,6 @@
           "Formulario de contacto para consultas personalizadas sobre disciplina o equipo",
           "Sección de favoritos e integración visual para navegación multi-idioma"
         ],
-        "imageSrc": "/images/templates/modelo-5.png",
-        "slug": "modelo-5",
-        "demoUrl": "https://modelo-5.bonaetech.com/",
-        "price": 150,
         "comingSoon": false
       }
     ]

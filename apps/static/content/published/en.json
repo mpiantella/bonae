@@ -69,7 +69,7 @@
     "years": "30+",
     "yearsLabel": "Years of combined experience",
     "clients": "Clients",
-    "clientsValue": "—",
+    "clientsValue": "30",
     "projects": "Projects completed",
     "projectsValue": "—",
     "presence": "Countries",
@@ -136,6 +136,10 @@
         "title": "Corporate Business Template",
         "description": "A lightweight, modern web template designed to help corporate services reach more clients efficiently.",
         "detailDescription": "This template offers a sleek, professional layout featuring a hero image slider, service highlights, key metrics counters, client logo showcases, and clear call-to-action sections to effectively convert visitors into leads.",
+        "imageSrc": "/images/templates/modelo-2.png",
+        "slug": "modelo-2",
+        "demoUrl": "https://modelo-2.bonaetech.com/",
+        "price": 100,
         "features": [
           "Lightweight and modern responsive design",
           "Hero slider section with call-to-action buttons",
@@ -143,10 +147,6 @@
           "Key metrics and achievements counters",
           "Multilingual support layout with contact integration"
         ],
-        "imageSrc": "/images/templates/modelo-2.png",
-        "slug": "modelo-2",
-        "demoUrl": "https://modelo-2.bonaetech.com/",
-        "price": 100,
         "comingSoon": false
       },
       {
@@ -154,6 +154,10 @@
         "title": "Administrative & Sales Dashboard Template",
         "description": "A modern, responsive administrative dashboard designed for tracking contracts, payments, seller performance, and overdue balances.",
         "detailDescription": "This template is an intuitive management dashboard template tailored for businesses that handle sales, contracts, and payment tracking across multiple channels. It features real-time overview metrics for active, pending, and canceled contracts, clear financial debt summaries, payment method breakdowns (Zelle, PayPal, Binance, Cash, etc.), and downloadable reports grouped by seller.",
+        "imageSrc": "/images/templates/modelo-3.png",
+        "slug": "modelo-3",
+        "demoUrl": "https://modelo-3.bonaetech.com/",
+        "price": 300,
         "features": [
           "Real-time contract status tracking (Active, Pending Dispatch, Canceled, Finished)",
           "Comprehensive balance summary (Total Debt, Overdue Debt, Pending Balance, Paid Total)",
@@ -161,10 +165,6 @@
           "Downloadable sales and debt reports grouped by seller",
           "Clean, mobile-optimized responsive layout with tabbed navigation"
         ],
-        "imageSrc": "/images/templates/modelo-3.png",
-        "slug": "modelo-3",
-        "demoUrl": "https://modelo-3.bonaetech.com/",
-        "price": 300,
         "comingSoon": false
       },
       {
@@ -172,6 +172,10 @@
         "title": "Women's Fashion & Beauty Store Template",
         "description": "An elegant and modern e-commerce web template designed for women's fashion, accessories, and beauty products.",
         "detailDescription": "Complete online store template featuring a refined aesthetic tailored for fashion and beauty brands. It includes structured product categories (dresses, blouses, skirts, coats, jewelry, makeup, skincare, and fragrances), a featured catalog layout, customer testimonial sections, promotional banners with countdown timers, and integrated search and navigation features.",
+        "imageSrc": "/images/templates/modelo-4.png",
+        "slug": "modelo-4",
+        "demoUrl": "https://modelo-4.bonaetech.com/",
+        "price": 150,
         "features": [
           "Clean, modern layout optimized for fashion and skincare products",
           "Comprehensive category navigation including clothing, accessories, and cosmetics",
@@ -179,10 +183,6 @@
           "Promotional offer banner with integrated countdown timer",
           "Built-in customer review section and social media links"
         ],
-        "imageSrc": "/images/templates/modelo-4.png",
-        "slug": "modelo-4",
-        "demoUrl": "https://modelo-4.bonaetech.com/",
-        "price": 150,
         "comingSoon": false
       },
       {
@@ -190,6 +190,10 @@
         "title": "Equestrian Equipment & Apparel",
         "description": "A refined, modern e-commerce template designed specifically for equestrian gear, riding apparel, and tack supplies.",
         "detailDescription": "An elegant and robust e-commerce template tailored for equestrian brands, horse tack shops, and riding apparel retailers. Featuring clean typography, curated product showcases, integrated promotional banners with countdown timers, customer contact forms, and bilingual-ready header navigation, this design provides a complete and professional shopping experience for horse enthusiasts and riders.",
+        "imageSrc": "/images/templates/modelo-5.png",
+        "slug": "modelo-5",
+        "demoUrl": "https://modelo-5.bonaetech.com/",
+        "price": 150,
         "features": [
           "Product catalog showcasing saddles, boots, apparel, helmets, and care accessories",
           "Promotional banner with dynamic countdown timer for special offers and sales",
@@ -197,10 +201,6 @@
           "Customer inquiry form tailored for rider discipline and horse equipment needs",
           "Favorites list and navigation support for multi-language toggle"
         ],
-        "imageSrc": "/images/templates/modelo-5.png",
-        "slug": "modelo-5",
-        "demoUrl": "https://modelo-5.bonaetech.com/",
-        "price": 150,
         "comingSoon": false
       }
     ]
