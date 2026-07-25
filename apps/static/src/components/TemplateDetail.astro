@@ -14,9 +14,6 @@ const section = t.templates;
 const backHref = templatesSectionHref(t.lang);
 const demoUrl = item.demoUrl.trim();
 const priceLabel = `${section.priceCurrency} ${item.price}`;
-// #region agent log
-fetch('http://127.0.0.1:7408/ingest/381749ce-c555-402d-bc1a-0721d05633f8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'c03b01'},body:JSON.stringify({sessionId:'c03b01',runId:'post-fix',hypothesisId:'A',location:'TemplateDetail.astro:demoUrl',message:'Template detail demoUrl wiring',data:{slug:item.slug,title:item.title,rawDemoUrl:item.demoUrl,trimmedDemoUrl:demoUrl,willShowDemoButton:Boolean(demoUrl),itemKeys:Object.keys(item),hasDemoUrlKey:'demoUrl' in item},timestamp:Date.now()})}).catch(()=>{});
-// #endregion
 ---
 
 <section class="flex-1 bg-cream py-10 md:py-14">
