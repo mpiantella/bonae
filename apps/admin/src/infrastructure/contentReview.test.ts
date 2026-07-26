@@ -56,4 +56,43 @@ describe('buildPublishReview', () => {
     const review = buildPublishReview({ draft, published });
     expect(review.changes.some((c) => c.label.includes('Horario'))).toBe(true);
   });
+
+  it('blocks publish when a live template is missing its detail page contract', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    Object.assign(draft.es.templates.items[0], {
+      slug: '',
+      imageSrc: '',
+      detailDescription: '',
+      demoUrl: '/modelo-2',
+      price: 0,
+      comingSoon: false,
+    });
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(reviewBlocksPublish(review)).toBe(true);
+    expect(review.validationErrors.join('\n')).toContain('Slug is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Image is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Detail description is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Price is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Live page URL must be an absolute http(s) URL');
+  });
+
+  it('warns when live template slugs or feature counts drift across locales', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    draft.en.templates.items[0].slug = 'different-model';
+    draft.en.templates.items[0].features = draft.en.templates.items[0].features.slice(1);
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(reviewBlocksPublish(review)).toBe(false);
+    expect(review.warnings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ label: 'templates.items[0].slug' }),
+        expect.objectContaining({ label: 'templates.items[0].features' }),
+      ]),
+    );
+  });
 });
