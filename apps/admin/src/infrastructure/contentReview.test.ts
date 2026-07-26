@@ -56,4 +56,49 @@ describe('buildPublishReview', () => {
     const review = buildPublishReview({ draft, published });
     expect(review.changes.some((c) => c.label.includes('Horario'))).toBe(true);
   });
+
+  it('blocks publish when a live template is missing detail page fields', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    draft.es.templates.items[0].slug = '';
+    draft.es.templates.items[0].detailDescription = '';
+    draft.es.templates.items[0].imageSrc = '';
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(reviewBlocksPublish(review)).toBe(true);
+    expect(review.validationErrors.some((e) => e.startsWith('ES:'))).toBe(true);
+    expect(
+      review.validationErrors.some((e) => e.includes('Slug is required for live templates')),
+    ).toBe(true);
+    expect(
+      review.validationErrors.some((e) => e.includes('Detail description is required for live templates')),
+    ).toBe(true);
+    expect(
+      review.validationErrors.some((e) => e.includes('Image is required for live templates')),
+    ).toBe(true);
+  });
+
+  it('warns when template route slugs or feature counts drift between locales', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    draft.en.templates.items[0].slug = 'business-model';
+    draft.en.templates.items[1].features = draft.en.templates.items[1].features.slice(0, -1);
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(reviewBlocksPublish(review)).toBe(false);
+    expect(review.warnings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          label: 'templates.items[0].slug',
+          message: 'Slug mismatch: es=modelo-empresarial, en=business-model',
+        }),
+        expect.objectContaining({
+          label: 'templates.items[1].features',
+          message: 'Feature count mismatch: es=4, en=3',
+        }),
+      ]),
+    );
+  });
 });
