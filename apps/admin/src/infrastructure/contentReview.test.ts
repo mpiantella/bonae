@@ -56,4 +56,41 @@ describe('buildPublishReview', () => {
     const review = buildPublishReview({ draft, published });
     expect(review.changes.some((c) => c.label.includes('Horario'))).toBe(true);
   });
+
+  it('blocks publish when a live template is missing detail-page requirements', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    const liveTemplate = draft.es.templates.items[0];
+    liveTemplate.slug = '';
+    liveTemplate.detailDescription = '';
+    liveTemplate.imageSrc = '';
+    liveTemplate.demoUrl = 'modelo-2.local';
+    liveTemplate.price = 0;
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(reviewBlocksPublish(review)).toBe(true);
+    expect(review.validationErrors.join('\n')).toContain('Slug is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Detail description is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Image is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Live page URL must be an absolute http(s) URL');
+    expect(review.validationErrors.join('\n')).toContain('Price is required for live templates');
+  });
+
+  it('allows coming-soon templates to omit live detail-page fields', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    const placeholder = draft.es.templates.items[0];
+    placeholder.comingSoon = true;
+    placeholder.slug = '';
+    placeholder.detailDescription = '';
+    placeholder.imageSrc = '';
+    placeholder.demoUrl = '';
+    placeholder.price = 0;
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(reviewBlocksPublish(review)).toBe(false);
+    expect(review.validationErrors).toEqual([]);
+  });
 });
