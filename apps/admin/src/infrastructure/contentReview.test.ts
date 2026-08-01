@@ -31,6 +31,51 @@ describe('buildPublishReview', () => {
     expect(reviewBlocksPublish(review)).toBe(true);
   });
 
+  it('blocks publishing live templates without route-critical fields', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+
+    Object.assign(draft.es.templates.items[0], {
+      slug: '',
+      detailDescription: '',
+      imageSrc: '',
+      demoUrl: 'modelo-2.local',
+      price: 0,
+      comingSoon: false,
+    });
+
+    const review = buildPublishReview({ draft, published });
+    const validationText = review.validationErrors.join('\n');
+
+    expect(validationText).toContain('Slug is required for live templates');
+    expect(validationText).toContain('Image is required for live templates');
+    expect(validationText).toContain('Detail description is required for live templates');
+    expect(validationText).toContain('Price is required for live templates');
+    expect(validationText).toContain('Live page URL must be an absolute http(s) URL');
+    expect(reviewBlocksPublish(review)).toBe(true);
+  });
+
+  it('allows coming-soon template placeholders without live template fields', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+
+    for (const locale of ['es', 'en'] as const) {
+      Object.assign(draft[locale].templates.items[0], {
+        slug: '',
+        detailDescription: '',
+        imageSrc: '',
+        demoUrl: 'internal-preview',
+        price: 0,
+        comingSoon: true,
+      });
+    }
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(review.validationErrors).toEqual([]);
+    expect(reviewBlocksPublish(review)).toBe(false);
+  });
+
   it('does not throw when published hours is a legacy string out of sync with draft schedule', () => {
     const published = loadPublished();
     const draft = structuredClone(published);
