@@ -10,6 +10,7 @@
     "prebuild": "npm run content:validate && npm run manifest:generate",
     "build": "astro build",
     "preview": "astro preview",
+    "test": "node --test test/*.test.mjs",
     "deploy": "node ../../scripts/inject-sw-build-hash.mjs dist && wrangler pages deploy dist --project-name bonae-tech"
   },
   "license": "Apache-2.0",
