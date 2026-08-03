@@ -32,7 +32,7 @@ function loadPublished(locale) {
 }
 
 function liveTemplates(doc) {
-  return doc.templates.items.filter((item) => !item.comingSoon);
+  return doc.templates.items.filter((item) => !item.comingSoon && item.slug.trim());
 }
 
 test('static template source does not ship debug instrumentation', () => {
@@ -48,6 +48,15 @@ test('static template source does not ship debug instrumentation', () => {
   }
 
   assert.deepEqual(offenders, []);
+});
+
+test('template static paths are generated only for non-placeholder items with slugs', () => {
+  const helperSource = readFileSync(path.join(sourceRoot, 'lib', 'templates.ts'), 'utf8');
+
+  assert.match(
+    helperSource,
+    /return doc\.templates\.items\.filter\(\(item\) => !item\.comingSoon && item\.slug\.trim\(\)\);/,
+  );
 });
 
 test('published live templates have production route, asset, and demo contracts', () => {
