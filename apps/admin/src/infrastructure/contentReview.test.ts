@@ -31,6 +31,72 @@ describe('buildPublishReview', () => {
     expect(reviewBlocksPublish(review)).toBe(true);
   });
 
+  it('blocks publishing a live template that is missing required detail metadata', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    const item = draft.es.templates.items[0];
+    item.slug = '';
+    item.imageSrc = '';
+    item.detailDescription = '';
+    item.price = 0;
+    item.demoUrl = '/relative-demo';
+    item.comingSoon = false;
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(reviewBlocksPublish(review)).toBe(true);
+    expect(review.validationErrors.join('\n')).toContain('Slug is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Image is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Detail description is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Price is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Live page URL must be an absolute http(s) URL');
+  });
+
+  it('allows coming-soon template placeholders to omit live-template detail metadata', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+
+    for (const locale of ['es', 'en'] as const) {
+      const item = draft[locale].templates.items[0];
+      item.slug = '';
+      item.imageSrc = '';
+      item.detailDescription = '';
+      item.demoUrl = '';
+      item.price = 0;
+      item.features = [];
+      item.comingSoon = true;
+    }
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(review.validationErrors).toEqual([]);
+    expect(reviewBlocksPublish(review)).toBe(false);
+  });
+
+  it('warns when localized live-template slugs or feature counts drift out of parity', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    draft.en.templates.items[0].slug = 'modelo-2-en';
+    draft.es.templates.items[0].features.push('Soporte de lanzamiento');
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(review.validationErrors).toEqual([]);
+    expect(reviewBlocksPublish(review)).toBe(false);
+    expect(review.warnings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          label: 'templates.items[0].features',
+          message: 'Feature count mismatch: es=6, en=5',
+        }),
+        expect.objectContaining({
+          label: 'templates.items[0].slug',
+          message: 'Slug mismatch: es=modelo-2, en=modelo-2-en',
+        }),
+      ]),
+    );
+  });
+
   it('does not throw when published hours is a legacy string out of sync with draft schedule', () => {
     const published = loadPublished();
     const draft = structuredClone(published);
