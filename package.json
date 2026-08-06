@@ -12,7 +12,7 @@
   "scripts": {
     "build": "turbo run build",
     "build:all": "turbo run build",
-    "test": "turbo run test --filter=@bonae/content-api-worker --filter=bonae-admin",
+    "test": "turbo run test --filter=@bonae/content --filter=@bonae/content-api-worker --filter=bonae-admin",
     "dev": "turbo run dev --filter=bonae-static",
     "dev:site": "turbo run dev --filter=bonae-static",
     "preview": "npm run preview -w bonae-static",
