@@ -18,6 +18,81 @@ function loadPublished() {
 }
 
 describe('buildPublishReview', () => {
+  it('blocks publishing live templates that are missing route or detail content', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+
+    draft.es.templates.items[0].slug = '';
+    draft.en.templates.items[1].detailDescription = '';
+
+    const review = buildPublishReview({ draft, published });
+    const validationDetail = review.validationErrors.join('\n');
+
+    expect(reviewBlocksPublish(review)).toBe(true);
+    expect(validationDetail).toContain('Slug is required for live templates');
+    expect(validationDetail).toContain('Detail description is required for live templates');
+    expect(validationDetail).not.toContain('templates.items.2.slug');
+  });
+
+  it('warns when localized template routes or feature counts drift apart', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+
+    draft.en.templates.items[0].slug = 'business-model';
+    draft.en.templates.items[1].features = draft.en.templates.items[1].features.slice(0, -1);
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(reviewBlocksPublish(review)).toBe(false);
+    expect(review.warnings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          label: 'templates.items[0].slug',
+          message: expect.stringContaining('Slug mismatch'),
+        }),
+        expect.objectContaining({
+          label: 'templates.items[1].features',
+          message: expect.stringContaining('Feature count mismatch'),
+        }),
+      ]),
+    );
+  });
+
+  it('summarizes template detail copy and feature changes for publish review', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+
+    draft.es.templates.backLabel = '← Regresar al catálogo';
+    draft.es.templates.items[0].detailDescription = 'Detalle extendido para revisar antes de publicar.';
+    draft.es.templates.items[0].features = [
+      'Bloque principal actualizado para prueba social',
+      ...draft.es.templates.items[0].features.slice(1),
+    ];
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(review.validationErrors).toEqual([]);
+    expect(review.changes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          label: 'ES › Plantillas › Volver',
+          kind: 'changed',
+          after: '← Regresar al catálogo',
+        }),
+        expect.objectContaining({
+          label: 'ES › Plantillas › Ítem 1 › Descripción larga',
+          kind: 'changed',
+          after: 'Detalle extendido para revisar antes de publicar.',
+        }),
+        expect.objectContaining({
+          label: 'ES › Plantillas › Ítem 1 › Características',
+          kind: 'changed',
+          after: expect.stringContaining('Bloque principal actualizado para prueba social'),
+        }),
+      ]),
+    );
+  });
+
   it('returns validation errors without throwing when a draft exceeds schema limits', () => {
     const published = loadPublished();
     const draft = structuredClone(published);
