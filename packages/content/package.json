@@ -25,6 +25,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "test": "node --test test/*.test.mjs",
     "validate": "node dist/cli.js",
     "validate:published": "node dist/cli.js ../../apps/static/content"
   },

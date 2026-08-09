@@ -56,4 +56,64 @@ describe('buildPublishReview', () => {
     const review = buildPublishReview({ draft, published });
     expect(review.changes.some((c) => c.label.includes('Horario'))).toBe(true);
   });
+
+  it('summarizes template detail label and feature changes before publish', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    draft.es.templates.backLabel = '← Volver al catálogo';
+    draft.en.templates.useTemplateLabel = 'Start from this template';
+    draft.es.templates.items[0].features = [
+      'Integración con WhatsApp incluida',
+      ...draft.es.templates.items[0].features.slice(1),
+    ];
+    draft.en.templates.items[1].features = draft.en.templates.items[1].features.slice(1);
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(review.changes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          locale: 'es',
+          label: 'ES › Plantillas › Volver',
+          kind: 'changed',
+          after: '← Volver al catálogo',
+        }),
+        expect.objectContaining({
+          locale: 'en',
+          label: 'EN › Plantillas › Usar plantilla',
+          kind: 'changed',
+          after: 'Start from this template',
+        }),
+        expect.objectContaining({
+          locale: 'es',
+          label: 'ES › Plantillas › Ítem 1 › Características',
+          kind: 'changed',
+          after: expect.stringContaining('Integración con WhatsApp incluida'),
+        }),
+      ]),
+    );
+    expect(review.warnings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          label: 'templates.items[1].features',
+          message: 'Feature count mismatch: es=4, en=3',
+        }),
+      ]),
+    );
+  });
+
+  it('blocks publishing live templates that cannot render a detail page', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    draft.es.templates.items[0].slug = '';
+    draft.es.templates.items[0].imageSrc = '';
+    draft.es.templates.items[0].detailDescription = '';
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(reviewBlocksPublish(review)).toBe(true);
+    expect(review.validationErrors.join('\n')).toContain('Slug is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Image is required for live templates');
+    expect(review.validationErrors.join('\n')).toContain('Detail description is required for live templates');
+  });
 });
