@@ -18,6 +18,45 @@ function loadPublished() {
 }
 
 describe('buildPublishReview', () => {
+  it('reports DatosClave changes with localized labels and missing EN warnings', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    draft.es.keyFigures.years = '35+';
+    draft.settings.socialLinks.instagram = 'https://instagram.com/bonaetech';
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(review.changes).toEqual(
+      expect.arrayContaining([
+        {
+          locale: 'es',
+          label: 'ES › DatosClave › Valor de años',
+          kind: 'changed',
+          before: '30+',
+          after: '35+',
+        },
+        {
+          locale: 'settings',
+          label: 'Configuración › Redes sociales › Instagram',
+          kind: 'changed',
+          before: '',
+          after: 'https://instagram.com/bonaetech',
+        },
+      ]),
+    );
+    expect(review.changeCount).toBe(2);
+    expect(review.warnings).toEqual(
+      expect.arrayContaining([
+        {
+          label: 'ES › DatosClave › Valor de años',
+          message: 'Falta traducción EN',
+        },
+      ]),
+    );
+    expect(review.validationErrors).toEqual([]);
+    expect(reviewBlocksPublish(review)).toBe(false);
+  });
+
   it('returns validation errors without throwing when a draft exceeds schema limits', () => {
     const published = loadPublished();
     const draft = structuredClone(published);
