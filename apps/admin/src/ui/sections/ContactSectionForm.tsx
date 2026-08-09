@@ -1,7 +1,11 @@
 import { useRef } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import type { ContentDocument } from '@bonae/content';
-import { asBusinessHours, defaultBusinessHoursDays } from '@bonae/content/schema';
+import {
+  applyContactForm,
+  readContactForm,
+  type ContactFormValues,
+} from '../../infrastructure/contactSectionFormAdapter.js';
 import type { LocaleSectionErrors } from '../../hooks/useFieldValidation.js';
 import { getLocaleFieldError } from '../../hooks/useFieldValidation.js';
 import { useFormEditSync } from '../../hooks/useFormEditSync.js';
@@ -15,54 +19,12 @@ interface Props {
   errors: LocaleSectionErrors;
 }
 
-type ContactFormValues = {
-  title: string;
-  subtitle: string;
-  hoursTitle: string;
-  form: {
-    name: string;
-    email: string;
-    phone: string;
-    business: string;
-    serviceType: string;
-    message: string;
-    submit: string;
-    serviceOptions: Array<{ value: string }>;
-  };
-};
-
-function readHoursTitle(hours: unknown): string {
-  if (hours && typeof hours === 'object' && typeof (hours as { title?: unknown }).title === 'string') {
-    return (hours as { title: string }).title;
-  }
-  if (typeof hours === 'string') {
-    return hours;
-  }
-  return '';
-}
-
 export function ContactSectionForm({ doc, onEdit, errors }: Props) {
   const docRef = useRef(doc);
   docRef.current = doc;
-  const parsedHours = asBusinessHours(doc.contact.hours);
-  const hoursTitleDefault = parsedHours?.title ?? readHoursTitle(doc.contact.hours);
 
   const { register, control, watch } = useForm<ContactFormValues>({
-    defaultValues: {
-      title: doc.contact.title,
-      subtitle: doc.contact.subtitle,
-      hoursTitle: hoursTitleDefault,
-      form: {
-        name: doc.contact.form.name,
-        email: doc.contact.form.email,
-        phone: doc.contact.form.phone,
-        business: doc.contact.form.business,
-        serviceType: doc.contact.form.serviceType,
-        message: doc.contact.form.message,
-        submit: doc.contact.form.submit,
-        serviceOptions: doc.contact.form.serviceOptions.map((value) => ({ value })),
-      },
-    },
+    defaultValues: readContactForm(doc),
   });
 
   const { fields, append, remove, move } = useFieldArray({
@@ -72,32 +34,7 @@ export function ContactSectionForm({ doc, onEdit, errors }: Props) {
   const values = watch();
 
   useFormEditSync(watch, (formValues) => {
-    const current = docRef.current;
-    const existingHours = asBusinessHours(current.contact.hours);
-    const nextDays = existingHours?.days ?? defaultBusinessHoursDays();
-    onEdit?.({
-      ...current,
-      contact: {
-        ...current.contact,
-        title: formValues.title ?? '',
-        subtitle: formValues.subtitle ?? '',
-        hours: {
-          title: formValues.hoursTitle ?? '',
-          days: nextDays,
-        },
-        form: {
-          ...current.contact.form,
-          name: formValues.form?.name ?? '',
-          email: formValues.form?.email ?? '',
-          phone: formValues.form?.phone ?? '',
-          business: formValues.form?.business ?? '',
-          serviceType: formValues.form?.serviceType ?? '',
-          message: formValues.form?.message ?? '',
-          submit: formValues.form?.submit ?? '',
-          serviceOptions: (formValues.form?.serviceOptions ?? []).map((opt) => opt?.value ?? ''),
-        },
-      },
-    });
+    onEdit?.(applyContactForm(formValues, docRef.current));
   });
 
   return (
