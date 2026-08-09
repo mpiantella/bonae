@@ -56,4 +56,45 @@ describe('buildPublishReview', () => {
     const review = buildPublishReview({ draft, published });
     expect(review.changes.some((c) => c.label.includes('Horario'))).toBe(true);
   });
+
+  it('summarizes live template pricing, feature, and demo URL changes', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+
+    draft.es.templates.priceCurrency = 'US$';
+    draft.es.templates.priceNote = 'por lanzamiento';
+    draft.es.templates.items[0].features = ['Nueva sección hero', 'Formulario conectado'];
+    draft.es.templates.items[0].demoUrl = 'https://modelo-2.example.com/';
+    draft.es.templates.items[0].price = 125;
+
+    const review = buildPublishReview({ draft, published });
+    const labels = review.changes.map((change) => change.label);
+
+    expect(labels).toContain('ES › Plantillas › Moneda');
+    expect(labels).toContain('ES › Plantillas › Nota de precio');
+    expect(labels).toContain('ES › Plantillas › Ítem 1 › Detalles técnicos');
+    expect(labels).toContain('ES › Plantillas › Ítem 1 › URL página en vivo');
+    expect(labels).toContain('ES › Plantillas › Ítem 1 › Precio');
+    expect(reviewBlocksPublish(review)).toBe(false);
+  });
+
+  it('blocks publishing when a live template has invalid page metadata', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+
+    draft.es.templates.items[0].slug = 'Modelo 2';
+    draft.es.templates.items[0].detailDescription = '';
+    draft.es.templates.items[0].demoUrl = '/modelo-2';
+    draft.es.templates.items[0].price = 0;
+
+    const review = buildPublishReview({ draft, published });
+    const validationText = review.validationErrors.join('\n');
+
+    expect(reviewBlocksPublish(review)).toBe(true);
+    expect(validationText).toContain('ES:');
+    expect(validationText).toContain('Slug must be lowercase kebab-case');
+    expect(validationText).toContain('Detail description is required for live templates');
+    expect(validationText).toContain('Price is required for live templates');
+    expect(validationText).toContain('Live page URL must be an absolute http(s) URL');
+  });
 });
