@@ -19,7 +19,12 @@ const { t, settings } = Astro.props;
   <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
     <p class="text-sm text-light-blue flex-1">
       {t.cookieBanner.message}{' '}
-      <a href={settings.legalLinks.privacy || '#'} class="text-terracotta hover:text-terracotta-dark underline">{t.cookieBanner.privacy}</a>
+      <a
+        href={t.lang === 'en' ? '/en/cookie-policy/' : settings.legalLinks.cookies || '/politica-de-cookies/'}
+        class="text-terracotta hover:text-terracotta-dark underline"
+      >
+        {t.footer.legal.cookies}
+      </a>
     </p>
     <button
       type="button"

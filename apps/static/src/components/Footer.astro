@@ -14,6 +14,12 @@ const instagramUrl = settings.socialLinks.instagram.trim();
 const facebookUrl = settings.socialLinks.facebook.trim();
 const linkedinUrl = settings.socialLinks.linkedin.trim();
 const hasSocialLinks = Boolean(instagramUrl || facebookUrl || linkedinUrl);
+const cookiesHref =
+  t.lang === 'en' ? '/en/cookie-policy/' : settings.legalLinks.cookies || '/politica-de-cookies/';
+const termsHref =
+  t.lang === 'en' ? '/en/terms-and-conditions/' : settings.legalLinks.terms || '/terminos-y-condiciones/';
+const privacyHref =
+  t.lang === 'en' ? '/en/privacy-policy/' : settings.legalLinks.privacy || '/politica-de-privacidad/';
 ---
 
 <footer class="bg-dark-blue-dark text-white">
@@ -80,9 +86,9 @@ const hasSocialLinks = Boolean(instagramUrl || facebookUrl || linkedinUrl);
 
     <div class="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
       <div class="flex flex-wrap justify-center gap-4 text-xs text-light-blue/80">
-        <a href={settings.legalLinks.privacy || '#'} class="hover:text-white transition-colors">{t.footer.legal.privacy}</a>
-        <a href={settings.legalLinks.terms || '#'} class="hover:text-white transition-colors">{t.footer.legal.terms}</a>
-        <a href={settings.legalLinks.cookies || '#'} class="hover:text-white transition-colors">{t.footer.legal.cookies}</a>
+        <a href={privacyHref} class="hover:text-white transition-colors">{t.footer.legal.privacy}</a>
+        <a href={termsHref} class="hover:text-white transition-colors">{t.footer.legal.terms}</a>
+        <a href={cookiesHref} class="hover:text-white transition-colors">{t.footer.legal.cookies}</a>
       </div>
       <p class="text-xs text-light-blue/80">{t.footer.copyright}</p>
     </div>

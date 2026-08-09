@@ -1,0 +1,56 @@
+---
+interface Props {
+  title: string;
+  updatedLabel: string;
+}
+
+const { title, updatedLabel } = Astro.props;
+---
+
+<article class="flex-1 bg-cream">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+    <h1 class="font-display text-3xl md:text-4xl font-bold text-dark-blue tracking-tight mb-3">
+      {title}
+    </h1>
+    <p class="text-sm text-body mb-10">{updatedLabel}</p>
+    <div class="legal-prose space-y-6 text-body leading-relaxed">
+      <slot />
+    </div>
+  </div>
+</article>
+
+<style>
+  .legal-prose :global(h2) {
+    font-family: 'Space Grotesk Variable', 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-dark-blue);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .legal-prose :global(p),
+  .legal-prose :global(li) {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .legal-prose :global(ul) {
+    list-style: disc;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .legal-prose :global(strong) {
+    color: var(--color-dark-blue);
+    font-weight: 600;
+  }
+
+  .legal-prose :global(a) {
+    color: var(--color-terracotta);
+    text-decoration: underline;
+  }
+</style>

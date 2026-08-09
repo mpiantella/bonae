@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LegalPage from '../components/LegalPage.astro';
+import { publishedEs, siteSettings, whatsappHrefFor } from '../lib/content';
+
+const t = publishedEs;
+const whatsappHref = whatsappHrefFor(t);
+const pageTitle = `Términos y Condiciones de Uso — ${t.siteName}`;
+const pageDescription =
+  'Términos y condiciones de uso del sitio web y servicios tecnológicos de Bonae Tech.';
+---
+
+<Layout
+  t={t}
+  settings={siteSettings}
+  whatsappHref={whatsappHref}
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+>
+  <Header t={t} />
+  <main class="flex-1 flex flex-col">
+    <LegalPage
+      title="Términos y Condiciones de Uso"
+      updatedLabel="Última actualización: Julio de 2026"
+    >
+      <p>
+        Bienvenido al sitio web de Bonae Tech. El acceso, navegación y uso de este sitio web y de los
+        servicios tecnológicos ofrecidos por la Empresa están sujetos a los presentes Términos y
+        Condiciones. Al ingresar o interactuar con nuestra plataforma, declaras haber leído, entendido
+        y aceptado en su totalidad estos términos.
+      </p>
+
+      <h2>1. Objeto y alcance</h2>
+      <p>
+        Bonae Tech es una empresa dedicada a la prestación de servicios tecnológicos, desarrollo de
+        software, gestión de proyectos y soluciones digitales. Este sitio web tiene como propósito
+        brindar información institucional, exhibir nuestro portafolio de servicios y facilitar canales
+        de contacto para potenciales clientes.
+      </p>
+
+      <h2>2. Uso adecuado del sitio web</h2>
+      <p>
+        El usuario se compromete a hacer un uso lícito y adecuado de los contenidos y servicios
+        prestados en el portal. Queda estrictamente prohibido:
+      </p>
+      <ul>
+        <li>
+          Realizar actos que vulneren los derechos de propiedad intelectual de Bonae Tech o de
+          terceros.
+        </li>
+        <li>
+          Intentar vulnerar la seguridad de la plataforma, introducir virus, scripts o códigos
+          maliciosos conforme a la legislación aplicable en materia de delitos informáticos.
+        </li>
+        <li>
+          Emplear los formularios de contacto para el envío de spam, publicidad no solicitada o
+          contenido ofensivo.
+        </li>
+      </ul>
+
+      <h2>3. Propiedad intelectual e industrial</h2>
+      <p>
+        Todos los contenidos presentados en este sitio web, incluyendo marcas, logotipos, textos,
+        diseños de interfaz, código fuente, gráficos, imágenes y elementos audiovisuales, son
+        propiedad exclusiva de Bonae Tech y cuentan con las licencias correspondientes. Queda
+        prohibida su reproducción, distribución, modificación o explotación no autorizada sin el
+        consentimiento expreso y por escrito de la Empresa.
+      </p>
+
+      <h2>4. Cotizaciones y contratación de servicios</h2>
+      <p>
+        La información y los costos expuestos en la web o en las presentaciones informativas poseen
+        carácter meramente orientativo. Las condiciones específicas, alcance, cronograma y honorarios
+        de cualquier servicio profesional contratado con Bonae Tech serán formalizados a través de la
+        firma de una propuesta comercial, contrato de servicios o acta de proyecto independiente.
+      </p>
+
+      <h2>5. Limitación de responsabilidad</h2>
+      <p>
+        Bonae Tech realiza esfuerzos razonables para garantizar la disponibilidad continua e
+        ininterrumpida de su sitio web y la exactitud de los contenidos. No obstante, la Empresa no se
+        hace responsable por:
+      </p>
+      <ul>
+        <li>
+          Interrupciones temporales del servicio derivadas de mantenimientos, fallas en la red
+          eléctrica o en proveedores de telecomunicaciones.
+        </li>
+        <li>
+          Daños causados por malware o ciberataques fuera del control técnico razonable de la Empresa.
+        </li>
+        <li>
+          Sitios web o enlaces de terceros enlazados en nuestro sitio, cuyos contenidos y políticas
+          son independientes a Bonae Tech.
+        </li>
+      </ul>
+
+      <h2>6. Ley aplicable y jurisdicción</h2>
+      <p>
+        Los presentes Términos y Condiciones se rigen e interpretan conforme a la legislación vigente
+        de la República Bolivariana de Venezuela. Para cualquier controversia derivada del uso de esta
+        plataforma, las partes se someten a la jurisdicción de los tribunales competentes de la ciudad
+        de Barquisimeto, renunciando a cualquier otro fuero que pudiere corresponderles.
+      </p>
+    </LegalPage>
+  </main>
+  <Footer t={t} settings={siteSettings} whatsappHref={whatsappHref} />
+</Layout>
