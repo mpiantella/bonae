@@ -96,6 +96,13 @@ const TEMPLATES_FIELDS: Record<string, string> = {
   comingSoonModalDismiss: 'Cerrar modal',
 };
 
+const TEMPLATES_TRANSLATABLE_FIELDS: Record<string, string> = {
+  sectionBadge: TEMPLATES_FIELDS.sectionBadge,
+  title: TEMPLATES_FIELDS.title,
+  subheadline: TEMPLATES_FIELDS.subheadline,
+  viewAllLabel: TEMPLATES_FIELDS.viewAllLabel,
+};
+
 const TEMPLATES_ITEM_FIELDS: Record<string, string> = {
   category: 'Categoría',
   title: 'Título',
@@ -104,6 +111,12 @@ const TEMPLATES_ITEM_FIELDS: Record<string, string> = {
   imageSrc: 'Imagen',
   slug: 'Slug',
   demoUrl: 'URL página en vivo',
+};
+
+const TEMPLATES_TRANSLATABLE_ITEM_FIELDS: Record<string, string> = {
+  category: TEMPLATES_ITEM_FIELDS.category,
+  title: TEMPLATES_ITEM_FIELDS.title,
+  description: TEMPLATES_ITEM_FIELDS.description,
 };
 
 const PLANS_FIELDS: Record<string, string> = {
@@ -688,6 +701,39 @@ function missingEnTranslationWarnings(
         const enAfter = enDraft.keyFigures[fieldKey as keyof typeof enDraft.keyFigures];
         if (typeof enBefore === 'string' && typeof enAfter === 'string' && enBefore === enAfter) {
           warnings.push({ label: change.label, message: 'Falta traducción EN' });
+        }
+      }
+    }
+
+    const templatesMatch = change.label.match(new RegExp(`^ES › ${SECTION_TITLES.templates} › (.+)$`));
+    if (templatesMatch) {
+      const fieldLabel = templatesMatch[1];
+      const fieldKey = Object.entries(TEMPLATES_TRANSLATABLE_FIELDS).find(([, label]) => label === fieldLabel)?.[0];
+      if (fieldKey) {
+        const enBefore = enPublished.templates[fieldKey as keyof typeof enPublished.templates];
+        const enAfter = enDraft.templates[fieldKey as keyof typeof enDraft.templates];
+        if (typeof enBefore === 'string' && typeof enAfter === 'string' && enBefore === enAfter) {
+          warnings.push({ label: change.label, message: 'Falta traducción EN' });
+        }
+      }
+
+      const itemMatch = fieldLabel.match(/^Ítem (\d+) › (.+)$/);
+      if (itemMatch) {
+        const index = Number(itemMatch[1]) - 1;
+        const itemFieldLabel = itemMatch[2];
+        const itemFieldKey = Object.entries(TEMPLATES_TRANSLATABLE_ITEM_FIELDS).find(
+          ([, label]) => label === itemFieldLabel,
+        )?.[0];
+        if (itemFieldKey) {
+          const enBefore = enPublished.templates.items[index]?.[
+            itemFieldKey as keyof (typeof enPublished.templates.items)[number]
+          ];
+          const enAfter = enDraft.templates.items[index]?.[
+            itemFieldKey as keyof (typeof enDraft.templates.items)[number]
+          ];
+          if (typeof enBefore === 'string' && typeof enAfter === 'string' && enBefore === enAfter) {
+            warnings.push({ label: change.label, message: 'Falta traducción EN' });
+          }
         }
       }
     }

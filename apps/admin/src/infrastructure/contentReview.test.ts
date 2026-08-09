@@ -56,4 +56,87 @@ describe('buildPublishReview', () => {
     const review = buildPublishReview({ draft, published });
     expect(review.changes.some((c) => c.label.includes('Horario'))).toBe(true);
   });
+
+  it('reports template item removals and locale parity warnings without blocking publish', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    draft.es.templates.items = draft.es.templates.items.slice(0, 2);
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(review.validationErrors).toEqual([]);
+    expect(reviewBlocksPublish(review)).toBe(false);
+    expect(review.changes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          locale: 'es',
+          label: 'ES › Plantillas › Ítem 3',
+          kind: 'removed',
+          before: 'Más plantillas próximamente',
+        }),
+      ]),
+    );
+    expect(review.warnings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          label: 'templates.items',
+          message: 'Array length mismatch for templates.items: es=2, en=3',
+        }),
+      ]),
+    );
+  });
+
+  it('warns when Spanish template section copy changes without an English update', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    draft.es.templates.title = 'Plantillas digitales para lanzar más rápido';
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(review.validationErrors).toEqual([]);
+    expect(review.changes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          locale: 'es',
+          label: 'ES › Plantillas › Título',
+          kind: 'changed',
+        }),
+      ]),
+    );
+    expect(review.warnings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          label: 'ES › Plantillas › Título',
+          message: 'Falta traducción EN',
+        }),
+      ]),
+    );
+  });
+
+  it('warns when Spanish template card copy changes without an English update', () => {
+    const published = loadPublished();
+    const draft = structuredClone(published);
+    draft.es.templates.items[0].description = 'Landing editable para validar una nueva oferta digital.';
+
+    const review = buildPublishReview({ draft, published });
+
+    expect(review.validationErrors).toEqual([]);
+    expect(review.changes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          locale: 'es',
+          label: 'ES › Plantillas › Ítem 1 › Descripción',
+          kind: 'changed',
+        }),
+      ]),
+    );
+    expect(review.warnings).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          label: 'ES › Plantillas › Ítem 1 › Descripción',
+          message: 'Falta traducción EN',
+        }),
+      ]),
+    );
+  });
 });
