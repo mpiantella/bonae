@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LegalPage from '../components/LegalPage.astro';
+import { publishedEs, siteSettings, whatsappHrefFor } from '../lib/content';
+
+const t = publishedEs;
+const whatsappHref = whatsappHrefFor(t);
+const pageTitle = `Política de Cookies — ${t.siteName}`;
+const pageDescription =
+  'Política de cookies de Bonae Tech: tipos de cookies que utilizamos, cómo gestionarlas y datos de contacto.';
+---
+
+<Layout
+  t={t}
+  settings={siteSettings}
+  whatsappHref={whatsappHref}
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+>
+  <Header t={t} />
+  <main class="flex-1 flex flex-col">
+    <LegalPage title="Política de Cookies" updatedLabel="Última actualización: Julio de 2026">
+      <p>
+        En Bonae Tech utilizamos cookies y tecnologías de rastreo similares en nuestro sitio web con el
+        propósito de optimizar la experiencia de navegación, analizar el tráfico y mejorar la calidad de
+        nuestros servicios digitales.
+      </p>
+
+      <h2>1. ¿Qué es una cookie?</h2>
+      <p>
+        Una cookie es un pequeño archivo de texto que se descarga en tu navegador o dispositivo
+        (computadora, smartphone o tablet) cuando visitas un sitio web. Permite a la página recordar tus
+        acciones y preferencias (como idioma, tamaño de letra u opciones de visualización) durante un
+        período determinado.
+      </p>
+
+      <h2>2. Tipos de cookies que utilizamos</h2>
+      <ul>
+        <li>
+          <strong>Cookies estrictamente necesarias:</strong> Son indispensables para el funcionamiento
+          técnico básico del sitio web (como la navegación por secciones y la seguridad del sitio). No
+          requieren consentimiento previo.
+        </li>
+        <li>
+          <strong>Cookies de rendimiento y analítica:</strong> Nos permiten medir el número de
+          visitantes, comprender cómo interactúan los usuarios con nuestra web y detectar posibles
+          errores de carga (ej. Google Analytics). Toda la información recolectada es agregada y anónima.
+        </li>
+        <li>
+          <strong>Cookies de funcionalidad:</strong> Permiten al sitio recordar las elecciones que
+          realizas para ofrecerte funciones personalizadas.
+        </li>
+      </ul>
+
+      <h2>3. Gestión y desactivación de cookies</h2>
+      <p>
+        El usuario puede en cualquier momento configurar o modificar las preferencias de su navegador
+        para bloquear o deshabilitar la instalación de cookies. Ten en cuenta que, si desactivas ciertas
+        cookies necesarias, algunas funciones del sitio web podrían verse limitadas o no funcionar de
+        manera óptima.
+      </p>
+      <p>Puedes gestionar las cookies desde la configuración de tu navegador habitual:</p>
+      <ul>
+        <li>
+          <strong>Google Chrome:</strong> Configuración &gt; Privacidad y seguridad &gt; Cookies y otros
+          datos de sitios.
+        </li>
+        <li>
+          <strong>Mozilla Firefox:</strong> Opciones &gt; Privacidad &amp; Seguridad &gt; Cookies y datos
+          del sitio.
+        </li>
+        <li>
+          <strong>Safari:</strong> Preferencias &gt; Privacidad &gt; Bloquear todas las cookies.
+        </li>
+        <li>
+          <strong>Microsoft Edge:</strong> Configuración &gt; Permisos del sitio &gt; Cookies y datos del
+          sitio.
+        </li>
+      </ul>
+
+      <h2>4. Contacto</h2>
+      <p>
+        Si tienes dudas o inquietudes acerca de nuestras políticas legales o la forma en que manejamos
+        tus datos en Bonae Tech, puedes comunicarte con nuestro equipo a través de:
+      </p>
+      <ul>
+        <li>
+          <strong>Correo electrónico:</strong>
+          {' '}
+          <a href="mailto:bonaetech@gmail.com">bonaetech@gmail.com</a>
+        </li>
+        <li>
+          <strong>Ubicación:</strong> Cabudare, Edo. Lara, Venezuela
+        </li>
+      </ul>
+    </LegalPage>
+  </main>
+  <Footer t={t} settings={siteSettings} whatsappHref={whatsappHref} />
+</Layout>

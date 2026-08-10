@@ -1,0 +1,106 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import LegalPage from '../../components/LegalPage.astro';
+import { publishedEn, siteSettings, whatsappHrefFor } from '../../lib/content';
+
+const t = publishedEn;
+const whatsappHref = whatsappHrefFor(t);
+const pageTitle = `Terms and Conditions of Use — ${t.siteName}`;
+const pageDescription =
+  'Terms and conditions of use for the Bonae Tech website and technology services.';
+---
+
+<Layout
+  t={t}
+  settings={siteSettings}
+  whatsappHref={whatsappHref}
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+>
+  <Header t={t} />
+  <main class="flex-1 flex flex-col">
+    <LegalPage
+      title="Terms and Conditions of Use"
+      updatedLabel="Last updated: July 2026"
+    >
+      <p>
+        Welcome to the Bonae Tech website. Access to, browsing, and use of this website and the
+        technology services offered by the Company are subject to these Terms and Conditions. By
+        entering or interacting with our platform, you declare that you have read, understood, and
+        fully accepted these terms.
+      </p>
+
+      <h2>1. Purpose and scope</h2>
+      <p>
+        Bonae Tech is a company dedicated to providing technology services, software development,
+        project management, and digital solutions. This website is intended to provide institutional
+        information, showcase our portfolio of services, and facilitate contact channels for
+        prospective clients.
+      </p>
+
+      <h2>2. Proper use of the website</h2>
+      <p>
+        Users agree to make lawful and appropriate use of the content and services provided on the
+        portal. The following are strictly prohibited:
+      </p>
+      <ul>
+        <li>
+          Acts that infringe the intellectual property rights of Bonae Tech or third parties.
+        </li>
+        <li>
+          Attempts to compromise the security of the platform, or introduce viruses, scripts, or
+          malicious code, in accordance with applicable cybercrime legislation.
+        </li>
+        <li>
+          Using contact forms to send spam, unsolicited advertising, or offensive content.
+        </li>
+      </ul>
+
+      <h2>3. Intellectual and industrial property</h2>
+      <p>
+        All content presented on this website, including trademarks, logos, texts, interface designs,
+        source code, graphics, images, and audiovisual elements, is the exclusive property of Bonae
+        Tech and is covered by the corresponding licenses. Unauthorized reproduction, distribution,
+        modification, or exploitation without the express written consent of the Company is prohibited.
+      </p>
+
+      <h2>4. Quotes and service contracting</h2>
+      <p>
+        Information and costs shown on the website or in informational presentations are merely
+        indicative. Specific conditions, scope, schedule, and fees for any professional service
+        contracted with Bonae Tech will be formalized through a commercial proposal, service
+        agreement, or independent project charter.
+      </p>
+
+      <h2>5. Limitation of liability</h2>
+      <p>
+        Bonae Tech makes reasonable efforts to ensure continuous and uninterrupted availability of its
+        website and the accuracy of its content. However, the Company is not liable for:
+      </p>
+      <ul>
+        <li>
+          Temporary service interruptions resulting from maintenance, power failures, or
+          telecommunications providers.
+        </li>
+        <li>
+          Damage caused by malware or cyberattacks beyond the Company’s reasonable technical control.
+        </li>
+        <li>
+          Third-party websites or links included on our site, whose content and policies are
+          independent of Bonae Tech.
+        </li>
+      </ul>
+
+      <h2>6. Governing law and jurisdiction</h2>
+      <p>
+        These Terms and Conditions are governed by and construed in accordance with the laws in force
+        in the Bolivarian Republic of Venezuela. For any dispute arising from the use of this
+        platform, the parties submit to the jurisdiction of the competent courts of the city of
+        Barquisimeto, waiving any other venue that may otherwise apply.
+      </p>
+    </LegalPage>
+  </main>
+  <Footer t={t} settings={siteSettings} whatsappHref={whatsappHref} />
+</Layout>

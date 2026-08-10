@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LegalPage from '../components/LegalPage.astro';
+import { publishedEs, siteSettings, whatsappHrefFor } from '../lib/content';
+
+const t = publishedEs;
+const whatsappHref = whatsappHrefFor(t);
+const pageTitle = `Política de Privacidad — ${t.siteName}`;
+const pageDescription =
+  'Política de privacidad de Bonae Tech: cómo recopilamos, usamos y protegemos tu información personal.';
+---
+
+<Layout
+  t={t}
+  settings={siteSettings}
+  whatsappHref={whatsappHref}
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+>
+  <Header t={t} />
+  <main class="flex-1 flex flex-col">
+    <LegalPage title="Política de Privacidad" updatedLabel="Última actualización: Julio de 2026">
+      <p>
+        En Bonae Tech, valoramos y respetamos la privacidad de los usuarios, clientes y visitantes de
+        nuestro sitio web y servicios digitales. La presente política de privacidad describe cómo
+        recopilamos, usamos, almacenamos y protegemos la información personal que nos proporcionas al
+        interactuar con nuestra plataforma.
+      </p>
+      <p>
+        Al utilizar nuestros servicios y navegar en nuestro sitio web, aceptas las prácticas descritas
+        en esta política, en concordancia con el principio constitucional de Habeas Data y las
+        normativas de protección de información aplicables en Venezuela y Latinoamérica.
+      </p>
+
+      <h2>1. Información que recopilamos</h2>
+      <p>Podemos recopilar los siguientes datos personales:</p>
+      <ul>
+        <li>
+          <strong>Información proporcionada directamente:</strong> Nombre, apellido, dirección de
+          correo electrónico, número de teléfono, nombre de la empresa, cargo y detalles del proyecto
+          compartidos a través de formularios de contacto, solicitudes de cotización o canales de
+          atención.
+        </li>
+        <li>
+          <strong>Información recopilada automáticamente:</strong> Dirección IP, tipo de navegador,
+          sistema operativo, páginas visitadas, tiempo de permanencia y datos de navegación mediante
+          cookies o tecnologías similares.
+        </li>
+      </ul>
+
+      <h2>2. Finalidad del tratamiento de datos</h2>
+      <p>Los datos personales recabados son procesados con las siguientes finalidades:</p>
+      <ul>
+        <li>Atender solicitudes de información, cotizaciones y asesorías tecnológicas.</li>
+        <li>
+          Prestar, ejecutar y gestionar los servicios de desarrollo, consultoría o proyectos
+          tecnológicos contratados.
+        </li>
+        <li>
+          Enviar comunicaciones administrativas, actualizaciones de servicio o respuestas a consultas.
+        </li>
+        <li>
+          Enviar material promocional, boletines informativos o novedades tecnológicas (siempre que el
+          usuario lo haya autorizado expresamente).
+        </li>
+        <li>
+          Mejorar la navegación, seguridad y experiencia del usuario en nuestra plataforma web.
+        </li>
+      </ul>
+
+      <h2>3. Confidencialidad y seguridad de la información</h2>
+      <p>
+        Nos comprometemos a aplicar medidas de seguridad técnicas, organizativas y administrativas
+        orientadas a evitar el acceso no autorizado, la pérdida, alteración o divulgación indebida de
+        tus datos. El personal y los colaboradores autorizados de Bonae Tech están sujetos a estrictos
+        deberes de confidencialidad.
+      </p>
+
+      <h2>4. Transferencia de datos a terceros</h2>
+      <p>
+        Bonae Tech no vende, alquila ni comercializa datos personales a terceros. Únicamente
+        compartiremos información cuando:
+      </p>
+      <ul>
+        <li>
+          Sea requerido por proveedores de infraestructura o herramientas tecnológicas necesarias para
+          la prestación de nuestros servicios (bajo acuerdos de confidencialidad adecuados).
+        </li>
+        <li>
+          Sea requerido por orden judicial, requerimiento de autoridad competente o mandato legal
+          legalmente fundamentado.
+        </li>
+      </ul>
+
+      <h2>5. Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)</h2>
+      <p>De acuerdo con las normativas regionales de privacidad, tienes derecho a:</p>
+      <ul>
+        <li>Acceder a los datos personales que conservamos sobre ti.</li>
+        <li>Rectificar cualquier información inexacta o desactualizada.</li>
+        <li>
+          Solicitar la eliminación/cancelación de tus datos cuando no sean necesarios para los fines
+          contratados.
+        </li>
+        <li>
+          Oponerte al envío de comunicaciones comerciales o al tratamiento para fines específicos.
+        </li>
+      </ul>
+      <p>
+        Para ejercer cualquiera de estos derechos, puedes enviar una solicitud a nuestro correo de
+        contacto:
+        {' '}
+        <a href="mailto:bonaetech@gmail.com">bonaetech@gmail.com</a>
+      </p>
+    </LegalPage>
+  </main>
+  <Footer t={t} settings={siteSettings} whatsappHref={whatsappHref} />
+</Layout>

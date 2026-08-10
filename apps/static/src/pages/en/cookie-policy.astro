@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import LegalPage from '../../components/LegalPage.astro';
+import { publishedEn, siteSettings, whatsappHrefFor } from '../../lib/content';
+
+const t = publishedEn;
+const whatsappHref = whatsappHrefFor(t);
+const pageTitle = `Cookie Policy — ${t.siteName}`;
+const pageDescription =
+  'Bonae Tech cookie policy: the types of cookies we use, how to manage them, and contact details.';
+---
+
+<Layout
+  t={t}
+  settings={siteSettings}
+  whatsappHref={whatsappHref}
+  pageTitle={pageTitle}
+  pageDescription={pageDescription}
+>
+  <Header t={t} />
+  <main class="flex-1 flex flex-col">
+    <LegalPage title="Cookie Policy" updatedLabel="Last updated: July 2026">
+      <p>
+        At Bonae Tech we use cookies and similar tracking technologies on our website to optimize the
+        browsing experience, analyze traffic, and improve the quality of our digital services.
+      </p>
+
+      <h2>1. What is a cookie?</h2>
+      <p>
+        A cookie is a small text file downloaded to your browser or device (computer, smartphone, or
+        tablet) when you visit a website. It allows the site to remember your actions and preferences
+        (such as language, font size, or display options) for a period of time.
+      </p>
+
+      <h2>2. Types of cookies we use</h2>
+      <ul>
+        <li>
+          <strong>Strictly necessary cookies:</strong> Essential for the basic technical operation of the
+          website (such as section navigation and site security). They do not require prior consent.
+        </li>
+        <li>
+          <strong>Performance and analytics cookies:</strong> Allow us to measure the number of
+          visitors, understand how users interact with our site, and detect possible loading errors
+          (e.g. Google Analytics). All information collected is aggregated and anonymous.
+        </li>
+        <li>
+          <strong>Functionality cookies:</strong> Allow the site to remember the choices you make so we
+          can offer personalized features.
+        </li>
+      </ul>
+
+      <h2>3. Managing and disabling cookies</h2>
+      <p>
+        You may configure or change your browser preferences at any time to block or disable cookies.
+        Please note that if you disable certain necessary cookies, some website features may be limited
+        or may not work optimally.
+      </p>
+      <p>You can manage cookies from your usual browser settings:</p>
+      <ul>
+        <li>
+          <strong>Google Chrome:</strong> Settings &gt; Privacy and security &gt; Cookies and other site
+          data.
+        </li>
+        <li>
+          <strong>Mozilla Firefox:</strong> Options &gt; Privacy &amp; Security &gt; Cookies and site
+          data.
+        </li>
+        <li>
+          <strong>Safari:</strong> Preferences &gt; Privacy &gt; Block all cookies.
+        </li>
+        <li>
+          <strong>Microsoft Edge:</strong> Settings &gt; Site permissions &gt; Cookies and site data.
+        </li>
+      </ul>
+
+      <h2>4. Contact</h2>
+      <p>
+        If you have questions or concerns about our legal policies or how we handle your data at Bonae
+        Tech, you can reach our team at:
+      </p>
+      <ul>
+        <li>
+          <strong>Email:</strong>
+          {' '}
+          <a href="mailto:bonaetech@gmail.com">bonaetech@gmail.com</a>
+        </li>
+        <li>
+          <strong>Location:</strong> Cabudare, Lara State, Venezuela
+        </li>
+      </ul>
+    </LegalPage>
+  </main>
+  <Footer t={t} settings={siteSettings} whatsappHref={whatsappHref} />
+</Layout>
