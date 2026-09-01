@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "prebuild": "npm run content:validate && npm run manifest:generate",
     "build": "astro build",
+    "test": "node --test test/*.test.mjs",
     "preview": "astro preview",
     "deploy": "node ../../scripts/inject-sw-build-hash.mjs dist && wrangler pages deploy dist --project-name bonae-tech"
   },
